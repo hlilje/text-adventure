@@ -26,5 +26,6 @@ namespace text_adventure {
     };
 
     class Forest : public Outdoor {
+        Forest();
     };
 }
