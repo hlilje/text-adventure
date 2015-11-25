@@ -1,11 +1,11 @@
 #pragma once
 
+#include "environments.hpp"
 #include "objects.hpp"
 #include <string>
 
 
 namespace text_adventure {
-
     class Actor {
         private:
             int _health;

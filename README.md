@@ -1,3 +1,3 @@
 # Text Adventure
 
-A text-based adventure game.
+A generic text-based adventure game.

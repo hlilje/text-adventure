@@ -1,24 +1,31 @@
+#pragma once
+
+#include "objects.hpp"
 #include <string>
+#include <vector>
 
 
 namespace text_adventure {
     enum Direction {NORTH, EAST, SOUTH, WEST};
 
+    class Actor;
+
     class Environment {
         private:
-            vector<Actor> actors;
-            vector<Object> objects;
-            vector<Environment> neighbours;
+            std::vector<Actor> actors;
+            std::vector<Object> objects;
+            std::vector<Environment> neighbours;
 
         public:
             std::string description();
-            virtual std::string type() = 0;
-            virtual vector<Direction> directions();
-            virtual Environment neighbour(const Direction dir);
+
+            virtual std::vector<Direction> directions();
+            virtual Environment & neighbour(const Direction dir);
             virtual void enter(const Actor & character);
             virtual void exit(const Actor & character);
             virtual void pick_up(const Object & object);
             virtual void drop(const Object & object);
+            virtual std::string type() = 0;
     };
 
     class Outdoor : public Environment {
@@ -26,6 +33,9 @@ namespace text_adventure {
     };
 
     class Forest : public Outdoor {
-        Forest();
+        public:
+            Forest();
+
+            virtual std::string type() override;
     };
 }

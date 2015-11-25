@@ -8,12 +8,12 @@ std::string Environment::description() {
     return type();
 }
 
-vector<Direction> Environment::directions() {
-    return vector<Direction>();
+std::vector<Direction> Environment::directions() {
+    return std::vector<Direction>();
 }
 
-Environment Environment::neighbour(const Direction dir) {
-    return *this;
+Environment & Environment::neighbour(const Direction dir) {
+    return neighbours[0];
 }
 
 void Environment::enter(const Actor & character) {
