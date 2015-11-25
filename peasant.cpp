@@ -3,17 +3,20 @@
 using namespace text_adventure;
 
 
-void peasant::go(const Direction direction) {
+Peasant::Peasant() {
 }
 
-void action() {
+void Peasant::go(const Direction direction) {
 }
 
-void drop(const Object & object) {
+void Peasant::action() {
 }
 
-void fight(const Actor & character) {
+void Peasant::drop(const Object & object) {
+}
+
+void Peasant::fight(const Actor & character) {
 };
 
-void pick_up(const Object & object) {
+void Peasant::pick_up(const Object & object) {
 };
