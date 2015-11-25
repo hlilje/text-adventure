@@ -2,7 +2,6 @@
 
 
 namespace text_adventure {
-    enum Direction {NORTH, EAST, SOUTH, WEST};
 
     class Actor {
         private:
