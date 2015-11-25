@@ -12,7 +12,7 @@ std::vector<Direction> Environment::directions() {
     return std::vector<Direction>();
 }
 
-Environment & Environment::neighbour(const Direction dir) {
+Environment * Environment::neighbour(const Direction dir) {
     return neighbours[0];
 }
 

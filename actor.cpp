@@ -3,9 +3,6 @@
 using namespace text_adventure;
 
 
-Actor::Actor() {
-}
-
 std::string Actor::name() {
     return _name;
 }

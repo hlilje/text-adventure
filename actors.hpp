@@ -13,7 +13,7 @@ namespace text_adventure {
             std::string _type;
 
         public:
-            Actor();
+            virtual ~Actor() = default;
 
             std::string name();
             std::string type();
@@ -28,6 +28,7 @@ namespace text_adventure {
     class Human : public Actor {
         public:
             Human();
+            ~Human() override = default;
 
             void go(const Direction direction) override;
             void action() override;
@@ -39,6 +40,7 @@ namespace text_adventure {
     class Peasant : public Human {
         public:
             Peasant();
+            ~Peasant() override = default;
 
             void go(const Direction direction) override;
             void action() override;

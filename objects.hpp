@@ -9,7 +9,7 @@ namespace text_adventure {
             bool _is_liquid;
 
         public:
-            Object();
+            virtual ~Object() = default;
 
             virtual bool is_liquid() = 0;
             virtual int volume() = 0;
@@ -19,6 +19,7 @@ namespace text_adventure {
     class Container : public Object {
         public:
             Container();
+            ~Container() override = default;
 
             bool is_liquid() override;
             int volume() override;
@@ -33,6 +34,7 @@ namespace text_adventure {
     class Consumable : public Object {
         public:
             Consumable();
+            ~Consumable() override = default;
 
             bool is_liquid() override;
             int volume() override;
@@ -42,6 +44,7 @@ namespace text_adventure {
     class Weapon : public Object {
         public:
             Weapon();
+            ~Weapon() override = default;
 
             bool is_liquid() override;
             int volume() override;
@@ -51,6 +54,7 @@ namespace text_adventure {
     class Key : public Object {
         public:
             Key();
+            ~Key() override = default;
 
             bool is_liquid() override;
             int volume() override;
@@ -60,6 +64,7 @@ namespace text_adventure {
     class Knapsack : public Container {
         public:
             Knapsack();
+            ~Knapsack() override = default;
 
             bool is_liquid() override;
             int volume() override;
