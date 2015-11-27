@@ -3,7 +3,7 @@
 
 using namespace text_adventure;
 
-Environment::Environment() : neighbours(std::vector<Environment *>(4)) {};
+Environment::Environment() : _neighbours(std::vector<Environment *>(4)) {};
 
 std::string Environment::description() {
     return type();
@@ -14,7 +14,7 @@ std::vector<Direction> Environment::directions() {
 }
 
 Environment * Environment::neighbour(const Direction dir) {
-    return neighbours[0];
+    return _neighbours[0];
 }
 
 void Environment::enter(const Actor & character) {

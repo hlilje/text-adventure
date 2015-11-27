@@ -12,9 +12,9 @@ namespace text_adventure {
 
     class Environment {
         private:
-            std::vector<Actor *> actors;
-            std::vector<Object *> objects;
-            std::vector<Environment *> neighbours;
+            std::vector<Actor *> _actors;
+            std::vector<Object *> _objects;
+            std::vector<Environment *> _neighbours;
 
         public:
             Environment();
