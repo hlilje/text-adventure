@@ -78,15 +78,34 @@ void run() {
         } else if (cmds.size() > 0 && cmds[0] == "go") {
             if (cmds.size() < 2) {
                 std::cout << "Go where?" << std::endl;
-                continue;
+            } else {
+                std::cout << "GO" << std::endl;
+                act();
             }
-            std::cout << "GO" << std::endl;
-            act();
+        } else if (cmds.size() > 0 && cmds[0] == "pickup") {
+            if (cmds.size() < 2) {
+                std::cout << "Pick what up?" << std::endl;
+            } else {
+                std::cout << "PICKUP" << std::endl;
+                act();
+            }
+        } else if (cmds.size() > 0 && cmds[0] == "drop") {
+            if (cmds.size() < 2) {
+                std::cout << "Drop what?" << std::endl;
+            } else {
+                std::cout << "DROP" << std::endl;
+                act();
+            }
+        } else if (cmd == "near") {
+            std::cout << "NEAR" << std::endl;
+        } else if (cmd == "where") {
+            std::cout << "WHERE" << std::endl;
         } else if (cmd == "") {
             // Ignore
         } else {
-            std::cout << "Unknown command: " << cmd << std::endl;
+            std::cout << "I don't know what '" << cmd << "' means." << std::endl;
         }
+        std::cout << std::endl;
     }
 }
 
