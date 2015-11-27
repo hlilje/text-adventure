@@ -3,7 +3,7 @@
 using namespace text_adventure;
 
 
-Human::Human() {
+Human::Human(Environment * room) : Actor(room) {
 }
 
 void Human::go(const Direction direction) {

@@ -2,10 +2,12 @@
 
 using namespace text_adventure;
 
+Actor::Actor(Environment * room) : _room(room) {}
 
 std::string Actor::name() {
     return _name;
 }
+
 std::string Actor::type() {
     return _type;
 }

@@ -11,8 +11,10 @@ namespace text_adventure {
             int _health;
             std::string _name;
             std::string _type;
+            Environment * _room;
 
         public:
+            Actor(Environment * room);
             virtual ~Actor() = default;
 
             std::string name();
@@ -27,7 +29,7 @@ namespace text_adventure {
 
     class Human : public Actor {
         public:
-            Human();
+            Human(Environment * room);
             ~Human() override = default;
 
             void go(const Direction direction) override;
@@ -39,7 +41,7 @@ namespace text_adventure {
 
     class Peasant : public Human {
         public:
-            Peasant();
+            Peasant(Environment * room);
             ~Peasant() override = default;
 
             void go(const Direction direction) override;
