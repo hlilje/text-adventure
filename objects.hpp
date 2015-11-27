@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 
 namespace text_adventure {
     class Object {
@@ -7,10 +8,12 @@ namespace text_adventure {
             int _volume;
             int _weight;
             bool _is_liquid;
+            std::string _type;
 
         public:
             virtual ~Object() = default;
 
+            std::string type();
             virtual bool is_liquid() = 0;
             virtual int volume() = 0;
             virtual int weight() = 0;
