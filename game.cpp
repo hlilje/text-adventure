@@ -11,6 +11,7 @@ using namespace text_adventure;
 std::vector<Actor *> actors;
 std::vector<Environment *> environments;
 std::vector<Object * > objects;
+Human * player;
 
 /**
  * Initialise the playable game
@@ -157,7 +158,7 @@ void run() {
                 act();
             }
         } else if (cmd == "look") {
-            std::cout << "LOOK" << std::endl;
+            std::cout << player->look() << std::endl;
         } else if (cmd == "") {
             // Ignore
         } else {
@@ -178,6 +179,7 @@ void cleanup() {
         delete environment;
     for (const auto & object : objects)
         delete object;
+    delete player;
 }
 
 int main() {
