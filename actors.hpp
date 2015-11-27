@@ -20,6 +20,8 @@ namespace text_adventure {
             std::string name();
             std::string type();
 
+            Environment * get_room();
+
             virtual void go(const Direction direction);
             virtual void action() = 0;
             virtual void drop(const Object & object) = 0;

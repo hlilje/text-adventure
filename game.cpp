@@ -116,6 +116,35 @@ bool choose_class(const std::string & clss) {
 }
 
 /**
+ * Go to the given direction.
+ * Return false if the direction is invalid.
+ */
+bool go_to(const std::string & direction) {
+    Environment * room = player->get_room();
+
+    if (direction == "n" || direction == "north") {
+        if (!room->neighbour(NORTH))
+            return false;
+        player->go(NORTH);
+    } else if (direction == "e" || direction == "east") {
+        if (!room->neighbour(EAST))
+            return false;
+        player->go(EAST);
+    } else if (direction == "s" || direction == "south") {
+        if (!room->neighbour(SOUTH))
+            return false;
+        player->go(SOUTH);
+    } else if (direction == "w" || direction == "west") {
+        if (!room->neighbour(WEST))
+            return false;
+        player->go(WEST);
+    } else {
+        return false;
+    }
+    return true;
+}
+
+/**
  * Call all actors' action functions.
  */
 void act() {
@@ -159,7 +188,7 @@ void run() {
                     if (choose_class(cmds[1]))
                         started = true;
                     else
-                        std::cout << "Invalid option." << std::endl;
+                        std::cout << "Invalid class." << std::endl;
                 }
             } else {
                 std::cout << "You must choose a class before continuing." << std::endl;
@@ -173,7 +202,8 @@ void run() {
             if (cmds.size() < 2) {
                 std::cout << "Go where?" << std::endl;
             } else {
-                act();
+                if (!go_to(cmds[1]))
+                    std::cout << "Invalid direction." << std::endl;
             }
         } else if (cmds.size() > 0 && cmds[0] == "take") {
             if (cmds.size() < 2) {
