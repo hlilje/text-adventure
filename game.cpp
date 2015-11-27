@@ -34,8 +34,8 @@ void print_greeting() {
         << "| a computer.                                          |\n"
         << "| Only one thing is certain; it is time to pick your   |\n"
         << "| class.                                               |\n"
-        << "| Enter 'choose x' with x = 1 for Warrior, 2 for Mage, |\n"
-        << "| and 3 for Peasant.                                   |\n"
+        << "| Enter 'choose <class>', where <class> must be        |\n"
+        << "| 'warrior', 'wizard' or 'peasant'.                    |\n"
         << "========================================================\n"
     << std::endl;
 }
@@ -48,7 +48,7 @@ void print_help() {
     << "Commands:\n"
     << "- go     <direction>: Go to the direction.\n"
     << "- attack <enemy>:     Attack the enemy.\n"
-    << "- pickup <item>:      Pick the item up.\n"
+    << "- take   <item>:      Take the item.\n"
     << "- drop   <item>:      Drop the item.\n"
     << "- choose <class>:     Select class before starting the game.\n"
     << "- help: Get this information.\n"
@@ -76,6 +76,23 @@ std::vector<std::string> split(const std::string &s, const char delim) {
         elems.push_back(item);
 
     return elems;
+}
+
+/**
+ * Choose the given class.
+ * Return false if the class is invalid.
+ */
+bool choose_class(const std::string & clss) {
+    if (clss == "warrior") {
+        std::cout << "You chose to be a mighty warrior." << std::endl;
+    } else if (clss == "wizard") {
+        std::cout << "You chose to be a fabulous wizard." << std::endl;
+    } else if (clss == "peasant") {
+        std::cout << "You chose to be a dirty peasant." << std::endl;
+    } else {
+        return false;
+    }
+    return true;
 }
 
 /**
@@ -119,7 +136,10 @@ void run() {
                     std::cout << "Who do you want to be?" << std::endl;
                 } else {
                     std::cout << "CHOOSE" << std::endl;
-                    started = true;
+                    if (choose_class(cmds[1]))
+                        started = true;
+                    else
+                        std::cout << "Invalid option." << std::endl;
                 }
             } else {
                 std::cout << "You must choose a class before continuing." << std::endl;
@@ -136,11 +156,11 @@ void run() {
                 std::cout << "GO" << std::endl;
                 act();
             }
-        } else if (cmds.size() > 0 && cmds[0] == "pickup") {
+        } else if (cmds.size() > 0 && cmds[0] == "take") {
             if (cmds.size() < 2) {
-                std::cout << "Pick what up?" << std::endl;
+                std::cout << "Take up?" << std::endl;
             } else {
-                std::cout << "PICKUP" << std::endl;
+                std::cout << "TAKE" << std::endl;
                 act();
             }
         } else if (cmds.size() > 0 && cmds[0] == "drop") {
@@ -157,6 +177,8 @@ void run() {
                 std::cout << "ATTACK" << std::endl;
                 act();
             }
+        } else if (cmd == "choose" || (cmds.size() > 0 && cmds[0] == "choose")) {
+            std::cout << "You may not change your class." << std::endl;
         } else if (cmd == "look") {
             std::cout << player->look() << std::endl;
         } else if (cmd == "") {
