@@ -17,10 +17,18 @@ std::string Environment::description() {
         desc += "\n";
     }
 
-    desc += "There are exits in the following directions: ";
+    desc += "There are exits in the following directions:";
     for(size_t i = 0; i < _neighbours.size(); ++i)
-        if(_neighbours[i] != nullptr)
-            desc += ((Direction) i) + " ";
+        if(_neighbours[i] != nullptr) {
+            if(i == 0)
+                desc += " north";
+            else if(i == 1)
+                desc += " east";
+            else if(i == 2)
+                desc += " south";
+            else
+                desc += " west";
+        }
     desc += "\n";
 
     return desc;
