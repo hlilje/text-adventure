@@ -3,6 +3,7 @@
 #include "objects.hpp"
 #include <string>
 #include <vector>
+#include <unordered_set>
 
 
 namespace text_adventure {
@@ -12,8 +13,8 @@ namespace text_adventure {
 
     class Environment {
         private:
-            std::vector<Actor *> _actors;
-            std::vector<Object *> _objects;
+            std::unordered_set<const Actor *> _actors;
+            std::unordered_set<const Object *> _objects;
             std::vector<Environment *> _neighbours;
 
         public:
@@ -24,10 +25,10 @@ namespace text_adventure {
 
             virtual std::vector<Direction> directions();
             virtual Environment * neighbour(const Direction dir);
-            virtual void enter(const Actor & character);
-            virtual void exit(const Actor & character);
-            virtual void pick_up(const Object & object);
-            virtual void drop(const Object & object);
+            virtual void enter(const Actor * character);
+            virtual void exit(const Actor * character);
+            virtual void pick_up(const Object * object);
+            virtual void drop(const Object * object);
             virtual std::string type() = 0;
     };
 
