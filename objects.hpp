@@ -11,7 +11,8 @@ namespace text_adventure {
             std::string _type;
 
         public:
-            Object(int vol, int weight, bool liquid);
+            Object(std::string const type, int const vol,
+                   int const weight, bool const liquid);
             virtual ~Object() = default;
 
             std::string type();
