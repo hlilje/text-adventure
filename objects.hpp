@@ -5,10 +5,10 @@
 namespace text_adventure {
     class Object {
         private:
+            std::string _type;
             int _volume;
             int _weight;
             bool _is_liquid;
-            std::string _type;
 
         public:
             Object(std::string const type, int const vol,
