@@ -23,10 +23,11 @@ namespace text_adventure {
             Environment * get_room();
 
             virtual void go(const Direction direction);
+            /**
+             * Make the actor act.
+             */
             virtual void action() = 0;
-            virtual void drop(const Object & object) = 0;
-            virtual void fight(const Actor & character) = 0;
-            virtual void pick_up(const Object & object) = 0;
+            virtual void fight(Actor * const character) = 0;
     };
 
     class Human : public Actor {
@@ -36,9 +37,9 @@ namespace text_adventure {
 
             void go(const Direction direction) override;
             void action() override;
-            void drop(const Object & object) override;
-            void fight(const Actor & character) override;
-            void pick_up(const Object & object) override;
+            void drop(const Object * const object);
+            void fight(Actor * const character);
+            void pick_up(const Object * const object);
             std::string look();
     };
 
@@ -48,9 +49,7 @@ namespace text_adventure {
             ~Warrior() override = default;
 
             void action() override;
-            void drop(const Object & object) override;
-            void fight(const Actor & character) override;
-            void pick_up(const Object & object) override;
+            void fight(Actor * const character) override;
     };
 
     class Wizard : public Human {
@@ -59,9 +58,7 @@ namespace text_adventure {
             ~Wizard() override = default;
 
             void action() override;
-            void drop(const Object & object) override;
-            void fight(const Actor & character) override;
-            void pick_up(const Object & object) override;
+            void fight(Actor * const character) override;
     };
 
     class Peasant : public Human {
@@ -70,9 +67,7 @@ namespace text_adventure {
             ~Peasant() override = default;
 
             void action() override;
-            void drop(const Object & object) override;
-            void fight(const Actor & character) override;
-            void pick_up(const Object & object) override;
+            void fight(Actor * const character) override;
     };
 
     class Creature : public Actor {
@@ -81,9 +76,7 @@ namespace text_adventure {
             ~Creature() override = default;
 
             void action() override;
-            void drop(const Object & object) override;
-            void fight(const Actor & character) override;
-            void pick_up(const Object & object) override;
+            void fight(Actor * const character) override;
     };
 
     class Hedgehog : public Creature {
@@ -92,8 +85,6 @@ namespace text_adventure {
             ~Hedgehog() override = default;
 
             void action() override;
-            void drop(const Object & object) override;
-            void fight(const Actor & character) override;
-            void pick_up(const Object & object) override;
+            void fight(Actor * const character) override;
     };
 }

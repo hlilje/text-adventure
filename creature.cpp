@@ -11,11 +11,5 @@ Creature::Creature(Environment * const room,
 void Creature::action() {
 }
 
-void Creature::drop(const Object & object) {
-}
-
-void Creature::fight(const Actor & character) {
-};
-
-void Creature::pick_up(const Object & object) {
+void Creature::fight(Actor * const character) {
 };

@@ -9,11 +9,5 @@ Hedgehog::Hedgehog(Environment * const room, std::string const name)
 void Hedgehog::action() {
 }
 
-void Hedgehog::drop(const Object & object) {
-}
-
-void Hedgehog::fight(const Actor & character) {
-};
-
-void Hedgehog::pick_up(const Object & object) {
+void Hedgehog::fight(Actor * const character) {
 };

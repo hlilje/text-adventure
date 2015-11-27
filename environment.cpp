@@ -38,6 +38,10 @@ std::unordered_set<Actor *> const & Environment::monsters() {
     return _actors;
 }
 
+std::unordered_set<Object *> & Environment::objects() {
+    return _objects;
+}
+
 std::vector<Direction> Environment::directions() {
     std::vector<Direction> dirs;
     for(size_t i = 0; i < _neighbours.size(); ++i)

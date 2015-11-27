@@ -9,20 +9,19 @@ Human::Human(Environment * const room,
     : Actor(room, type, name) {}
 
 void Human::go(const Direction direction) {
-    Environment * new_room = _room->neighbour(direction);
-    _room = new_room;
+    _room = _room->neighbour(direction);
 }
 
 void Human::action() {
 }
 
-void Human::drop(const Object & object) {
+void Human::drop(const Object * const object) {
 }
 
-void Human::fight(const Actor & character) {
+void Human::fight(Actor * const character) {
 };
 
-void Human::pick_up(const Object & object) {
+void Human::pick_up(const Object * const object) {
 };
 
 std::string Human::look() {

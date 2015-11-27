@@ -10,11 +10,5 @@ Wizard::Wizard(Environment * const room,
 void Wizard::action() {
 }
 
-void Wizard::drop(const Object & object) {
-}
-
-void Wizard::fight(const Actor & character) {
-};
-
-void Wizard::pick_up(const Object & object) {
+void Wizard::fight(Actor * const character) {
 };

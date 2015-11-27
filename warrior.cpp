@@ -10,11 +10,5 @@ Warrior::Warrior(Environment * const room,
 void Warrior::action() {
 }
 
-void Warrior::drop(const Object & object) {
-}
-
-void Warrior::fight(const Actor & character) {
-};
-
-void Warrior::pick_up(const Object & object) {
+void Warrior::fight(Actor * const character) {
 };

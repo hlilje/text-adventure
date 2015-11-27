@@ -21,9 +21,14 @@ namespace text_adventure {
             Environment();
             virtual ~Environment() = default;
 
+            /**
+             * Return a description string of location, items, directions and
+             * monsters.
+             */
             std::string description();
             std::unordered_set<Actor *> const & monsters();
             void add_neighbour(Direction dir, Environment * const room);
+            std::unordered_set<Object *> & objects();
 
             virtual std::vector<Direction> directions();
             virtual Environment * neighbour(const Direction dir);

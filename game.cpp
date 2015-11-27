@@ -1,6 +1,7 @@
 #include "actors.hpp"
 #include "environments.hpp"
 #include "objects.hpp"
+#include <algorithm>
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -14,7 +15,7 @@ std::vector<Object * > objects;
 Human * player;
 
 /**
- * Initialise the playable game
+ * Initialise the playable game.
  */
 void initialise() {
     Environment * env = new Forest();
@@ -145,6 +146,26 @@ bool go_to(const std::string & direction) {
 }
 
 /**
+ * Take the given item.
+ * Return false if the item is invalid.
+ */
+bool take_item(const std::string & item) {
+    Environment * room = player->get_room();
+    auto objects = room->objects();
+    auto finder = [item](Object * const object) {
+        return object->type() == item;
+    };
+    auto it = std::find_if(objects.begin(), objects.end(), finder);
+
+    if (it == objects.end()) return false;
+
+    // TODO
+    player->pick_up(*it);
+
+    return true;
+}
+
+/**
  * Call all actors' action functions.
  */
 void act() {
@@ -213,19 +234,20 @@ void run() {
             if (cmds.size() < 2) {
                 std::cout << "Take what up?" << std::endl;
             } else {
-                act();
+                if (!take_item(cmds[1]))
+                    std::cout << "Invalid item." << std::endl;
             }
         } else if (cmds.size() > 0 && cmds[0] == "drop") {
             if (cmds.size() < 2) {
                 std::cout << "Drop what?" << std::endl;
             } else {
-                act();
+                act(); // TODO
             }
         } else if (cmds.size() > 0 && cmds[0] == "attack") {
             if (cmds.size() < 2) {
                 std::cout << "Attack what?" << std::endl;
             } else {
-                act();
+                act(); // TODO
             }
         } else if (cmd == "choose" || (cmds.size() > 0 && cmds[0] == "choose")) {
             std::cout << "You may not change your class." << std::endl;
