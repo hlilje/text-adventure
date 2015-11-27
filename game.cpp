@@ -185,10 +185,12 @@ void run() {
                 if (cmds.size() < 2) {
                     std::cout << "Who do you want to be?" << std::endl;
                 } else {
-                    if (choose_class(cmds[1]))
+                    if (choose_class(cmds[1])) {
                         started = true;
-                    else
+                        std::cout << std::endl << player->look();
+                    } else {
                         std::cout << "Invalid class." << std::endl;
+                    }
                 }
             } else {
                 std::cout << "You must choose a class before continuing." << std::endl;
@@ -204,6 +206,8 @@ void run() {
             } else {
                 if (!go_to(cmds[1]))
                     std::cout << "Invalid direction." << std::endl;
+                else
+                    std::cout << player->look();
             }
         } else if (cmds.size() > 0 && cmds[0] == "take") {
             if (cmds.size() < 2) {
