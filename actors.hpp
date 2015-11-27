@@ -75,4 +75,28 @@ namespace text_adventure {
             void fight(const Actor & character) override;
             void pick_up(const Object & object) override;
     };
+
+    class Creature : public Actor {
+        public:
+            Creature(Environment * room);
+            ~Creature() override = default;
+
+            void go(const Direction direction) override;
+            void action() override;
+            void drop(const Object & object) override;
+            void fight(const Actor & character) override;
+            void pick_up(const Object & object) override;
+    };
+
+    class Hedgehog : public Creature {
+        public:
+            Hedgehog(Environment * room);
+            ~Hedgehog() override = default;
+
+            void go(const Direction direction) override;
+            void action() override;
+            void drop(const Object & object) override;
+            void fight(const Actor & character) override;
+            void pick_up(const Object & object) override;
+    };
 }

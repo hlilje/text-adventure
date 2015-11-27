@@ -57,3 +57,8 @@ void Environment::pick_up(Object * const object) {
 void Environment::drop(Object * const object) {
     _objects.insert(object);
 }
+
+void Environment::add_neighbour(Direction dir, Environment * const room) {
+    _neighbours[dir] = room;
+}
+

@@ -17,8 +17,25 @@ Human * player;
  * Initialise the playable game
  */
 void initialise() {
-    Forest * forest = new Forest();
-    environments.emplace_back(forest);
+    Forest * env = new Forest();
+    environments.emplace_back(env);
+    env = new Forest();
+    environments.emplace_back(env);
+    env = new Forest();
+    environments.emplace_back(env);
+
+    environments[0]->add_neighbour(NORTH, environments[1]);
+    environments[1]->add_neighbour(SOUTH, environments[0]);
+    environments[1]->add_neighbour(EAST, environments[2]);
+    environments[2]->add_neighbour(WEST, environments[1]);
+
+    Object * obj = new Key();
+    objects.emplace_back(obj);
+    environments[1]->drop(obj);
+
+    Actor * act = new Hedgehog(environments[2]);
+    actors.emplace_back(act);
+    environments[2]->enter(act);
 }
 
 /**

@@ -11,22 +11,19 @@ namespace text_adventure {
             std::string _type;
 
         public:
+            Object(int vol, int weight, bool liquid);
             virtual ~Object() = default;
 
             std::string type();
-            virtual bool is_liquid() = 0;
-            virtual int volume() = 0;
-            virtual int weight() = 0;
+            bool is_liquid();
+            int volume();
+            int weight();
     };
 
     class Container : public Object {
         public:
             Container();
             ~Container() override = default;
-
-            bool is_liquid() override;
-            int volume() override;
-            int weight() override;
 
             int add(const Object & object);
             int max_volume();
@@ -38,39 +35,23 @@ namespace text_adventure {
         public:
             Consumable();
             ~Consumable() override = default;
-
-            bool is_liquid() override;
-            int volume() override;
-            int weight() override;
     };
 
     class Weapon : public Object {
         public:
             Weapon();
             ~Weapon() override = default;
-
-            bool is_liquid() override;
-            int volume() override;
-            int weight() override;
     };
 
     class Key : public Object {
         public:
             Key();
             ~Key() override = default;
-
-            bool is_liquid() override;
-            int volume() override;
-            int weight() override;
     };
 
     class Knapsack : public Container {
         public:
             Knapsack();
             ~Knapsack() override = default;
-
-            bool is_liquid() override;
-            int volume() override;
-            int weight() override;
     };
 }
