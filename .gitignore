@@ -26,9 +26,7 @@
 *.exe
 *.out
 *.app
-main
 game
-test
 
 # OS files
 *.DS_Store
