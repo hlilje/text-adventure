@@ -45,7 +45,13 @@ void print_greeting() {
 void print_help() {
     std::cout
     << "Commands:\n"
-    << "- go: GO.\n"
+    << "- go     <direction>: Go to the direction.\n"
+    << "- attack <enemy>:     Attack the enemy.\n"
+    << "- pickup <item>:      Pick the item up.\n"
+    << "- drop   <item>:      Drop the item.\n"
+    << "- choose <class>:     Select class before starting the game.\n"
+    << "- help: Get this information.\n"
+    << "- look: Get information about your surroundings.\n"
     << "- exit: Exit the game.\n"
     << std::endl;
 }
@@ -71,6 +77,9 @@ std::vector<std::string> split(const std::string &s, const char delim) {
     return elems;
 }
 
+/**
+ * Call all actors' action functions.
+ */
 void act() {
     for (const auto & actor : actors)
         actor->action();
