@@ -3,6 +3,7 @@
 
 using namespace text_adventure;
 
+Environment::Environment() : neighbours(std::vector<Environment *>(4)) {};
 
 std::string Environment::description() {
     return type();

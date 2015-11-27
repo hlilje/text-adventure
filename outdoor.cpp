@@ -3,7 +3,7 @@
 using namespace text_adventure;
 
 
-Outdoor::Outdoor() {
+Outdoor::Outdoor() : Environment() {
 
 }
 

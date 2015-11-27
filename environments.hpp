@@ -17,6 +17,7 @@ namespace text_adventure {
             std::vector<Environment *> neighbours;
 
         public:
+            Environment();
             virtual ~Environment() = default;
 
             std::string description();

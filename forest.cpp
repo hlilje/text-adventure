@@ -4,7 +4,7 @@
 using namespace text_adventure;
 
 
-Forest::Forest() {
+Forest::Forest() : Outdoor() {
 
 }
 
