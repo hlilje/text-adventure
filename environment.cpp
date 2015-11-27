@@ -10,11 +10,15 @@ std::string Environment::description() {
 }
 
 std::vector<Direction> Environment::directions() {
-    return std::vector<Direction>();
+    std::vector<Direction> dirs;
+    for(size_t i = 0; i < _neighbours.size(); ++i)
+        if(_neighbours[i] != nullptr)
+            dirs.push_back((Direction) i);
+    return dirs;
 }
 
 Environment * Environment::neighbour(const Direction dir) {
-    return _neighbours[0];
+    return _neighbours[dir];
 }
 
 void Environment::enter(const Actor * character) {

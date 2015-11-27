@@ -13,4 +13,8 @@ std::string Actor::type() {
 }
 
 void Actor::go(const Direction direction) {
+    Environment * new_room = _room->neighbour(direction);
+    _room->exit(this);
+    new_room->enter(this);
+    _room = new_room;
 }
