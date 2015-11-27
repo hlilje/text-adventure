@@ -85,10 +85,13 @@ std::vector<std::string> split(const std::string &s, const char delim) {
 bool choose_class(const std::string & clss) {
     if (clss == "warrior") {
         std::cout << "You chose to be a mighty warrior." << std::endl;
+        player = new Warrior(environments[0]);
     } else if (clss == "wizard") {
         std::cout << "You chose to be a fabulous wizard." << std::endl;
+        player = new Wizard(environments[0]);
     } else if (clss == "peasant") {
         std::cout << "You chose to be a dirty peasant." << std::endl;
+        player = new Peasant(environments[0]);
     } else {
         return false;
     }
@@ -104,7 +107,8 @@ void act() {
 }
 
 /**
- * Start and run the gameplay loop.
+ * Start and run the gameplay loop which reads player input and acts
+ * accordingly.
  */
 void run() {
     print_greeting();
@@ -135,7 +139,6 @@ void run() {
                 if (cmds.size() < 2) {
                     std::cout << "Who do you want to be?" << std::endl;
                 } else {
-                    std::cout << "CHOOSE" << std::endl;
                     if (choose_class(cmds[1]))
                         started = true;
                     else
@@ -153,28 +156,24 @@ void run() {
             if (cmds.size() < 2) {
                 std::cout << "Go where?" << std::endl;
             } else {
-                std::cout << "GO" << std::endl;
                 act();
             }
         } else if (cmds.size() > 0 && cmds[0] == "take") {
             if (cmds.size() < 2) {
                 std::cout << "Take up?" << std::endl;
             } else {
-                std::cout << "TAKE" << std::endl;
                 act();
             }
         } else if (cmds.size() > 0 && cmds[0] == "drop") {
             if (cmds.size() < 2) {
                 std::cout << "Drop what?" << std::endl;
             } else {
-                std::cout << "DROP" << std::endl;
                 act();
             }
         } else if (cmds.size() > 0 && cmds[0] == "attack") {
             if (cmds.size() < 2) {
                 std::cout << "Attack what?" << std::endl;
             } else {
-                std::cout << "ATTACK" << std::endl;
                 act();
             }
         } else if (cmd == "choose" || (cmds.size() > 0 && cmds[0] == "choose")) {

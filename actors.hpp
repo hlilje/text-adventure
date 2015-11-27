@@ -40,6 +40,30 @@ namespace text_adventure {
             std::string look();
     };
 
+    class Warrior : public Human {
+        public:
+            Warrior(Environment * room);
+            ~Warrior() override = default;
+
+            void go(const Direction direction) override;
+            void action() override;
+            void drop(const Object & object) override;
+            void fight(const Actor & character) override;
+            void pick_up(const Object & object) override;
+    };
+
+    class Wizard : public Human {
+        public:
+            Wizard(Environment * room);
+            ~Wizard() override = default;
+
+            void go(const Direction direction) override;
+            void action() override;
+            void drop(const Object & object) override;
+            void fight(const Actor & character) override;
+            void pick_up(const Object & object) override;
+    };
+
     class Peasant : public Human {
         public:
             Peasant(Environment * room);
