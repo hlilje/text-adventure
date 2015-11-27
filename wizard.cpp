@@ -6,9 +6,6 @@ using namespace text_adventure;
 Wizard::Wizard(Environment * room) : Human(room) {
 }
 
-void Wizard::go(const Direction direction) {
-}
-
 void Wizard::action() {
 }
 

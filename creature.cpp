@@ -6,9 +6,6 @@ using namespace text_adventure;
 Creature::Creature(Environment * room) : Actor(room) {
 }
 
-void Creature::go(const Direction direction) {
-}
-
 void Creature::action() {
 }
 

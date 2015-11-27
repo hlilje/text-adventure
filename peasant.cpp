@@ -6,9 +6,6 @@ using namespace text_adventure;
 Peasant::Peasant(Environment * room) : Human(room) {
 }
 
-void Peasant::go(const Direction direction) {
-}
-
 void Peasant::action() {
 }
 

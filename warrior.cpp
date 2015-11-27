@@ -6,9 +6,6 @@ using namespace text_adventure;
 Warrior::Warrior(Environment * room) : Human(room) {
 }
 
-void Warrior::go(const Direction direction) {
-}
-
 void Warrior::action() {
 }
 

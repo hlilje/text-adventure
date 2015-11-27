@@ -7,6 +7,8 @@ Human::Human(Environment * room) : Actor(room) {
 }
 
 void Human::go(const Direction direction) {
+    Environment * new_room = _room->neighbour(direction);
+    _room = new_room;
 }
 
 void Human::action() {

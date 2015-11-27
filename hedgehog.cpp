@@ -6,9 +6,6 @@ using namespace text_adventure;
 Hedgehog::Hedgehog(Environment * room) : Creature(room) {
 }
 
-void Hedgehog::go(const Direction direction) {
-}
-
 void Hedgehog::action() {
 }
 

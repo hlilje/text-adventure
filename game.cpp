@@ -17,7 +17,7 @@ Human * player;
  * Initialise the playable game
  */
 void initialise() {
-    Forest * env = new Forest();
+    Environment * env = new Forest();
     environments.emplace_back(env);
     env = new Forest();
     environments.emplace_back(env);

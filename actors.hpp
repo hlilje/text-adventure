@@ -47,7 +47,6 @@ namespace text_adventure {
             Warrior(Environment * room);
             ~Warrior() override = default;
 
-            void go(const Direction direction) override;
             void action() override;
             void drop(const Object & object) override;
             void fight(const Actor & character) override;
@@ -59,7 +58,6 @@ namespace text_adventure {
             Wizard(Environment * room);
             ~Wizard() override = default;
 
-            void go(const Direction direction) override;
             void action() override;
             void drop(const Object & object) override;
             void fight(const Actor & character) override;
@@ -71,7 +69,6 @@ namespace text_adventure {
             Peasant(Environment * room);
             ~Peasant() override = default;
 
-            void go(const Direction direction) override;
             void action() override;
             void drop(const Object & object) override;
             void fight(const Actor & character) override;
@@ -83,7 +80,6 @@ namespace text_adventure {
             Creature(Environment * room);
             ~Creature() override = default;
 
-            void go(const Direction direction) override;
             void action() override;
             void drop(const Object & object) override;
             void fight(const Actor & character) override;
@@ -95,7 +91,6 @@ namespace text_adventure {
             Hedgehog(Environment * room);
             ~Hedgehog() override = default;
 
-            void go(const Direction direction) override;
             void action() override;
             void drop(const Object & object) override;
             void fight(const Actor & character) override;
