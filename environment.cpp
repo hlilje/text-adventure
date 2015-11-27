@@ -17,7 +17,7 @@ std::string Environment::description() {
         desc += "\n";
     }
 
-    desc += "\nThere are exits in the following directions: ";
+    desc += "There are exits in the following directions: ";
     for(size_t i = 0; i < _neighbours.size(); ++i)
         if(_neighbours[i] != nullptr)
             desc += ((Direction) i) + " ";

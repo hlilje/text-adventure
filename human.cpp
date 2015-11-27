@@ -29,12 +29,11 @@ std::string Human::look() {
     auto monsters = _room->monsters();
 
     if(monsters.empty())
-        sight += "There is noone else here.\n\n";
+        sight += "There is noone else here.\n";
     else {
         sight += "There are the following monsters here:\n";
         for(Actor * const m : monsters)
             sight += "A " + m->type() + " named " + m->name() + "\n";
-        sight += "\n";
     }
     return sight;
 }

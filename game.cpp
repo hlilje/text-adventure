@@ -207,7 +207,7 @@ void run() {
             }
         } else if (cmds.size() > 0 && cmds[0] == "take") {
             if (cmds.size() < 2) {
-                std::cout << "Take up?" << std::endl;
+                std::cout << "Take what up?" << std::endl;
             } else {
                 act();
             }
@@ -226,7 +226,7 @@ void run() {
         } else if (cmd == "choose" || (cmds.size() > 0 && cmds[0] == "choose")) {
             std::cout << "You may not change your class." << std::endl;
         } else if (cmd == "look") {
-            std::cout << player->look() << std::endl;
+            std::cout << player->look();
         } else if (cmd == "") {
             // Ignore
         } else {
