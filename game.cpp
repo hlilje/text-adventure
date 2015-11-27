@@ -33,7 +33,7 @@ void initialise() {
     objects.emplace_back(obj);
     environments[1]->drop(obj);
 
-    Actor * act = new Hedgehog(environments[2]);
+    Actor * act = new Hedgehog(environments[2], "Igor");
     actors.emplace_back(act);
     environments[2]->enter(act);
 }
@@ -102,13 +102,13 @@ std::vector<std::string> split(const std::string &s, const char delim) {
 bool choose_class(const std::string & clss) {
     if (clss == "warrior") {
         std::cout << "You chose to be a mighty warrior." << std::endl;
-        player = new Warrior(environments[0]);
+        player = new Warrior(environments[0], "Ulf");
     } else if (clss == "wizard") {
         std::cout << "You chose to be a fabulous wizard." << std::endl;
-        player = new Wizard(environments[0]);
+        player = new Wizard(environments[0], "Gondolf");
     } else if (clss == "peasant") {
         std::cout << "You chose to be a dirty peasant." << std::endl;
-        player = new Peasant(environments[0]);
+        player = new Peasant(environments[0], "Unnamed");
     } else {
         return false;
     }

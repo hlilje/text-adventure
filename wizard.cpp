@@ -3,8 +3,9 @@
 using namespace text_adventure;
 
 
-Wizard::Wizard(Environment * room) : Human(room) {
-}
+Wizard::Wizard(Environment * const room,
+               std::string const name)
+    : Human(room, "wizard", name) {}
 
 void Wizard::action() {
 }

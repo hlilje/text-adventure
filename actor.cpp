@@ -2,7 +2,10 @@
 
 using namespace text_adventure;
 
-Actor::Actor(Environment * room) : _room(room) {}
+Actor::Actor(Environment * const room,
+             std::string const type,
+             std::string const name)
+    : _room(room), _type(type), _name(name) {}
 
 std::string Actor::name() {
     return _name;

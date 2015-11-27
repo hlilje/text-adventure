@@ -3,8 +3,10 @@
 using namespace text_adventure;
 
 
-Human::Human(Environment * room) : Actor(room) {
-}
+Human::Human(Environment * const room,
+             std::string const type,
+             std::string const name)
+    : Actor(room, type, name) {}
 
 void Human::go(const Direction direction) {
     Environment * new_room = _room->neighbour(direction);

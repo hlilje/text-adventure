@@ -9,12 +9,12 @@ namespace text_adventure {
     class Actor {
         protected:
             int _health;
-            std::string _name;
-            std::string _type;
             Environment * _room;
+            std::string _type;
+            std::string _name;
 
         public:
-            Actor(Environment * room);
+            Actor(Environment * const room, std::string const type, std::string const name);
             virtual ~Actor() = default;
 
             std::string name();
@@ -31,7 +31,7 @@ namespace text_adventure {
 
     class Human : public Actor {
         public:
-            Human(Environment * room);
+            Human(Environment * const room, std::string const type, std::string const name);
             ~Human() override = default;
 
             void go(const Direction direction) override;
@@ -44,7 +44,7 @@ namespace text_adventure {
 
     class Warrior : public Human {
         public:
-            Warrior(Environment * room);
+            Warrior(Environment * const room, std::string const name);
             ~Warrior() override = default;
 
             void action() override;
@@ -55,7 +55,7 @@ namespace text_adventure {
 
     class Wizard : public Human {
         public:
-            Wizard(Environment * room);
+            Wizard(Environment * const room, std::string const name);
             ~Wizard() override = default;
 
             void action() override;
@@ -66,7 +66,7 @@ namespace text_adventure {
 
     class Peasant : public Human {
         public:
-            Peasant(Environment * room);
+            Peasant(Environment * const room, std::string const name);
             ~Peasant() override = default;
 
             void action() override;
@@ -77,7 +77,7 @@ namespace text_adventure {
 
     class Creature : public Actor {
         public:
-            Creature(Environment * room);
+            Creature(Environment * const room, std::string const type, std::string const name);
             ~Creature() override = default;
 
             void action() override;
@@ -88,7 +88,7 @@ namespace text_adventure {
 
     class Hedgehog : public Creature {
         public:
-            Hedgehog(Environment * room);
+            Hedgehog(Environment * const room, std::string const name);
             ~Hedgehog() override = default;
 
             void action() override;

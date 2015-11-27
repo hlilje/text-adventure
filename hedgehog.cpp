@@ -3,8 +3,8 @@
 using namespace text_adventure;
 
 
-Hedgehog::Hedgehog(Environment * room) : Creature(room) {
-}
+Hedgehog::Hedgehog(Environment * const room, std::string const name)
+    : Creature(room, "hedgehog", name) {}
 
 void Hedgehog::action() {
 }
