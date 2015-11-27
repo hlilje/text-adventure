@@ -7,7 +7,7 @@
 
 namespace text_adventure {
     class Actor {
-        private:
+        protected:
             int _health;
             std::string _name;
             std::string _type;
@@ -37,6 +37,7 @@ namespace text_adventure {
             void drop(const Object & object) override;
             void fight(const Actor & character) override;
             void pick_up(const Object & object) override;
+            std::string look();
     };
 
     class Peasant : public Human {

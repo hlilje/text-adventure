@@ -3,13 +3,13 @@
 
 using namespace text_adventure;
 
-Environment::Environment() : _neighbours(std::vector<Environment *>(4)) {};
+Environment::Environment() : _neighbours(std::vector<Environment *>(4)) {}
 
 std::string Environment::description() {
     std::string desc = "You are in a " + type() + ".\n\n";
 
     if(_actors.empty())
-        desc += "The place is contains no items\n\n";
+        desc += "The place contains no items.\n\n";
     else {
         desc += "You see the following items:\n";
         for(Object * const o : _objects)
@@ -17,13 +17,17 @@ std::string Environment::description() {
         desc += "\n";
     }
 
-    desc += "There are exits in the following directions: ";
+    desc += "\nThere are exits in the following directions: ";
     for(size_t i = 0; i < _neighbours.size(); ++i)
         if(_neighbours[i] != nullptr)
-            desc += ((Direction) i);
+            desc += ((Direction) i) + " ";
     desc += "\n";
 
     return desc;
+}
+
+std::unordered_set<Actor *> const & Environment::monsters() {
+    return _actors;
 }
 
 std::vector<Direction> Environment::directions() {
