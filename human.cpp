@@ -6,7 +6,7 @@ using namespace text_adventure;
 Human::Human(Environment * const room,
              std::string const type,
              std::string const name)
-    : Actor(room, type, name) {}
+    : Actor(room, type, name), _hand(nullptr) {}
 
 void Human::go(const Direction direction) {
     _room = _room->neighbour(direction);
@@ -21,7 +21,12 @@ void Human::drop(const Object * const object) {
 void Human::fight(Actor * const character) {
 };
 
-void Human::pick_up(const Object * const object) {
+bool Human::pick_up(const Object * const object) {
+    if (_hand != nullptr) return false;
+
+    _hand = object;
+
+    return true;
 };
 
 std::string Human::look() {

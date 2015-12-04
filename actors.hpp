@@ -31,6 +31,10 @@ namespace text_adventure {
     };
 
     class Human : public Actor {
+        private:
+            const Object * _hand;
+            // Container * _back; // TODO
+
         public:
             Human(Environment * const room, std::string const type, std::string const name);
             ~Human() override = default;
@@ -39,7 +43,11 @@ namespace text_adventure {
             void action() override;
             void drop(const Object * const object);
             void fight(Actor * const character);
-            void pick_up(const Object * const object);
+            /**
+             * Try to pick up the given object.
+             * Return false if there is no room to pick it up.
+             */
+            bool pick_up(const Object * const object);
             std::string look();
     };
 
