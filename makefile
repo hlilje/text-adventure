@@ -2,7 +2,7 @@ CXX = g++-4.9
 CFLAGS = -g -Wall -std=c++11
 LIBS = ../cxxtest
 TARGET = game
-TEST_TARGET = test
+TEST_TARGET = game_test
 
 .PHONY: default all clean test
 

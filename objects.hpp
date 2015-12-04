@@ -1,8 +1,8 @@
 #pragma once
 
 #include <algorithm>
-#include <string>
 #include <iostream>
+#include <string>
 #include <unordered_set>
 
 namespace text_adventure {
@@ -38,11 +38,17 @@ namespace text_adventure {
                       const bool holds_liquid);
             ~Container() override = default;
 
+            /**
+             * Try to add the given object.
+             * Return true if successful.
+             */
             bool add(Object * const object);
-            int max_volume() const;
-            int max_weight() const;
-            bool contains(const std::string & item) const;
-            void remove(const std::string & item);
+            void remove(Object * const object);
+            /**
+             * Return the item with the given type.
+             * Return nullptr if no such type exists.
+             */
+            Object * find(const std::string & type) const;
     };
 
     class Consumable : public Object {

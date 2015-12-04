@@ -95,7 +95,7 @@ void initialise() {
     env = new Desert();
     environments.emplace_back(env);
     env = new Desert();
-    environments.emplace_back(env);    
+    environments.emplace_back(env);
 
     environments[6]->add_neighbour(NORTH, environments[12]);
     environments[12]->add_neighbour(SOUTH, environments[6]);
@@ -137,7 +137,7 @@ void initialise() {
     environments[19]->add_neighbour(NORTH, environments[21]);
     environments[21]->add_neighbour(SOUTH, environments[19]);
 
-    
+
     /**
      * Place items.
      */
@@ -177,7 +177,7 @@ void initialise() {
     act = new Worg(environments[14], "Hugo");
     actors.emplace_back(act);
     environments[14]->enter(act);
-    
+
     act = new Goblin(environments[17], "Neep");
     actors.emplace_back(act);
     environments[17]->enter(act);
@@ -369,10 +369,10 @@ void run() {
             }
         } else if (cmds.size() > 0 && cmds[0] == "take") {
             if (cmds.size() < 2) {
-                std::cout << "Take what up?" << std::endl;
+                std::cout << "Take what?" << std::endl;
             } else {
                 if (!player->pick_up(cmds[1]))
-                    std::cout << "You can not pick that up." << std::endl;
+                    std::cout << "You can not take that." << std::endl;
             }
         } else if (cmds.size() > 0 && cmds[0] == "drop") {
             if (cmds.size() < 2) {

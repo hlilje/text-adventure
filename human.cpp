@@ -9,9 +9,11 @@ Human::Human(Environment * const room,
     : Actor(room, type, name), _hand(nullptr), _back(nullptr) {}
 
 bool Human::drop(const std::string & item) {
+    Object * object = _back != nullptr ? _back->find(item) : _hand;
+
     // Container on back
     if (_back != nullptr) {
-        if (!_back->contains(item)) {
+        if (object == nullptr) {
             if (_hand == nullptr) {
                 return false;
             } else {
@@ -21,7 +23,7 @@ bool Human::drop(const std::string & item) {
                     _hand = nullptr;
             }
         } else {
-            _back->remove(item);
+            _back->remove(object);
         }
     // Nothing on back
     } else {
@@ -34,6 +36,8 @@ bool Human::drop(const std::string & item) {
                 _hand = nullptr;
         }
     }
+
+    _room->drop(object);
 
     return true;
 }

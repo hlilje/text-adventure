@@ -33,7 +33,7 @@ namespace text_adventure {
 
     class Human : public Actor {
         private:
-            const Object * _hand;
+            Object * _hand;
             Container * _back;
 
         public:
