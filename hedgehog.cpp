@@ -10,4 +10,4 @@ void Hedgehog::action() {
 }
 
 void Hedgehog::fight(Actor * const character) {
-};
+}

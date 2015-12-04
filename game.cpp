@@ -19,6 +19,7 @@ Human * player;
  * Initialise the playable game.
  */
 void initialise() {
+    // Forests
     Environment * env = new Forest();
     environments.emplace_back(env);
     env = new Forest();
@@ -38,6 +39,32 @@ void initialise() {
     Actor * act = new Hedgehog(environments[2], "Igor");
     actors.emplace_back(act);
     environments[2]->enter(act);
+
+    // Caves
+    env = new Cave();
+    environments.emplace_back(env);
+    environments[2]->add_neighbour(NORTH, environments[3]);
+    environments[3]->add_neighbour(SOUTH, environments[2]);
+    act = new Zombie(environments[3], "Bertha");
+    actors.emplace_back(act);
+    environments[3]->enter(act);
+
+    env = new Cave();
+    environments.emplace_back(env);
+    environments[3]->add_neighbour(NORTH, environments[4]);
+    environments[4]->add_neighbour(SOUTH, environments[3]);
+
+    env = new Cave();
+    environments.emplace_back(env);
+    environments[3]->add_neighbour(EAST, environments[5]);
+    environments[5]->add_neighbour(WEST, environments[3]);
+
+    env = new Cave();
+    environments.emplace_back(env);
+    environments[4]->add_neighbour(WEST, environments[6]);
+    environments[6]->add_neighbour(EAST, environments[4]);
+    environments[5]->add_neighbour(NORTH, environments[6]);
+    environments[6]->add_neighbour(SOUTH, environments[5]);
 }
 
 /**

@@ -95,4 +95,58 @@ namespace text_adventure {
             void action() override;
             void fight(Actor * const character) override;
     };
+
+    class Dragon : public Creature {
+        public:
+            Dragon(Environment * const room, std::string const name);
+            ~Dragon() override = default;
+
+            void action() override;
+            void fight(Actor * const character) override;
+    };
+
+    class Worg : public Creature {
+        public:
+            Worg(Environment * const room, std::string const name);
+            ~Worg() override = default;
+
+            void action() override;
+            void fight(Actor * const character) override;
+    };
+
+    class Humanoid : public Actor {
+        public:
+            Humanoid(Environment * const room, std::string const type, std::string const name);
+            ~Humanoid() override = default;
+
+            void action() override;
+            void fight(Actor * const character) override;
+    };
+
+    class Demon : public Humanoid {
+        public:
+            Demon(Environment * const room, std::string const name);
+            ~Demon() override = default;
+
+            void action() override;
+            void fight(Actor * const character) override;
+    };
+
+    class Goblin : public Humanoid {
+        public:
+            Goblin(Environment * const room, std::string const name);
+            ~Goblin() override = default;
+
+            void action() override;
+            void fight(Actor * const character) override;
+    };
+
+    class Zombie : public Humanoid {
+        public:
+            Zombie(Environment * const room, std::string const name);
+            ~Zombie() override = default;
+
+            void action() override;
+            void fight(Actor * const character) override;
+    };
 }

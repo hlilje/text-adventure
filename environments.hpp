@@ -54,4 +54,50 @@ namespace text_adventure {
 
             virtual std::string type() override;
     };
+
+    class Desert : public Outdoor {
+        public:
+            Desert();
+            ~Desert() override = default;
+
+            virtual std::string type() override;
+    };
+
+    class Mountain : public Outdoor {
+        public:
+            Mountain();
+            ~Mountain() override = default;
+
+            virtual std::string type() override;
+    };
+
+    class Indoor : public Environment {
+        public:
+            Indoor();
+            ~Indoor() override = default;
+    };
+
+
+    class Cave : public Indoor {
+        public:
+            Cave();
+            ~Cave() override = default;
+
+            virtual std::string type() override;
+    };
+    class Castle : public Indoor {
+        public:
+            Castle();
+            ~Castle() override = default;
+
+            virtual std::string type() override;
+    };
+
+    class Hut : public Indoor {
+        public:
+            Hut();
+            ~Hut() override = default;
+
+            virtual std::string type() override;
+    };
 }
