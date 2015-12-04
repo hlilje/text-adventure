@@ -19,6 +19,10 @@ Human * player;
  * Initialise the playable game.
  */
 void initialise() {
+    /**
+     * Create world.
+     */
+
     // Forests
     Environment * env = new Forest();
     environments.emplace_back(env);
@@ -32,26 +36,11 @@ void initialise() {
     environments[1]->add_neighbour(EAST, environments[2]);
     environments[2]->add_neighbour(WEST, environments[1]);
 
-    Object * obj = new Key();
-    objects.emplace_back(obj);
-    environments[1]->drop(obj);
-
-    Actor * act = new Hedgehog(environments[2], "Igor");
-    actors.emplace_back(act);
-    environments[2]->enter(act);
-
-    obj = new Knapsack(10, 10);
-    objects.emplace_back(obj);
-    environments[1]->drop(obj);
-
     // Caves
     env = new Cave();
     environments.emplace_back(env);
     environments[2]->add_neighbour(NORTH, environments[3]);
     environments[3]->add_neighbour(SOUTH, environments[2]);
-    act = new Zombie(environments[3], "Bertha");
-    actors.emplace_back(act);
-    environments[3]->enter(act);
 
     env = new Cave();
     environments.emplace_back(env);
@@ -69,6 +58,142 @@ void initialise() {
     environments[6]->add_neighbour(EAST, environments[4]);
     environments[5]->add_neighbour(NORTH, environments[6]);
     environments[6]->add_neighbour(SOUTH, environments[5]);
+
+    // Forest opening
+    env = new Forest();
+    environments.emplace_back(env);
+    environments[5]->add_neighbour(WEST, environments[7]);
+    environments[7]->add_neighbour(EAST, environments[5]);
+
+    env = new Hut();
+    environments.emplace_back(env);
+    environments[7]->add_neighbour(WEST, environments[8]);
+    environments[8]->add_neighbour(EAST, environments[7]);
+
+    // Mountain range
+    env = new Mountain();
+    environments.emplace_back(env);
+    env = new Mountain();
+    environments.emplace_back(env);
+    env = new Mountain();
+    environments.emplace_back(env);
+
+    environments[7]->add_neighbour(NORTH, environments[9]);
+    environments[9]->add_neighbour(SOUTH, environments[7]);
+    environments[9]->add_neighbour(NORTH, environments[10]);
+    environments[10]->add_neighbour(SOUTH, environments[9]);
+    environments[10]->add_neighbour(NORTH, environments[11]);
+    environments[11]->add_neighbour(SOUTH, environments[10]);
+
+    // Vast desert
+    env = new Desert();
+    environments.emplace_back(env);
+    env = new Desert();
+    environments.emplace_back(env);
+    env = new Desert();
+    environments.emplace_back(env);
+    env = new Desert();
+    environments.emplace_back(env);
+    env = new Desert();
+    environments.emplace_back(env);
+    env = new Desert();
+    environments.emplace_back(env);    
+
+    environments[6]->add_neighbour(NORTH, environments[12]);
+    environments[12]->add_neighbour(SOUTH, environments[6]);
+    environments[11]->add_neighbour(EAST, environments[16]);
+    environments[16]->add_neighbour(WEST, environments[11]);
+
+    environments[12]->add_neighbour(EAST, environments[13]);
+    environments[13]->add_neighbour(WEST, environments[12]);
+    environments[14]->add_neighbour(EAST, environments[15]);
+    environments[15]->add_neighbour(WEST, environments[14]);
+    environments[16]->add_neighbour(EAST, environments[17]);
+    environments[17]->add_neighbour(WEST, environments[16]);
+
+    environments[12]->add_neighbour(NORTH, environments[14]);
+    environments[14]->add_neighbour(SOUTH, environments[12]);
+    environments[13]->add_neighbour(NORTH, environments[15]);
+    environments[15]->add_neighbour(SOUTH, environments[13]);
+    environments[14]->add_neighbour(NORTH, environments[16]);
+    environments[16]->add_neighbour(SOUTH, environments[14]);
+    environments[15]->add_neighbour(NORTH, environments[17]);
+    environments[17]->add_neighbour(SOUTH, environments[15]);
+
+    // Final Castle
+    env = new Castle();
+    environments.emplace_back(env);
+    env = new Castle();
+    environments.emplace_back(env);
+    env = new Castle();
+    environments.emplace_back(env);
+    env = new Castle();
+    environments.emplace_back(env);
+
+    environments[17]->add_neighbour(NORTH, environments[18]);
+    environments[18]->add_neighbour(SOUTH, environments[17]);
+    environments[18]->add_neighbour(NORTH, environments[19]);
+    environments[19]->add_neighbour(SOUTH, environments[18]);
+    environments[19]->add_neighbour(WEST, environments[20]);
+    environments[20]->add_neighbour(EAST, environments[19]);
+    environments[19]->add_neighbour(NORTH, environments[21]);
+    environments[21]->add_neighbour(SOUTH, environments[19]);
+
+    
+    /**
+     * Place items.
+     */
+
+    // Forest
+    Object * obj = new Key();
+    objects.emplace_back(obj);
+    environments[1]->drop(obj);
+
+    obj = new Knapsack(10, 10);
+    objects.emplace_back(obj);
+    environments[1]->drop(obj);
+
+    /**
+     * Spawn monsters.
+     */
+
+    // Forest
+    Actor * act = new Hedgehog(environments[2], "Igor");
+    actors.emplace_back(act);
+    environments[2]->enter(act);
+
+    // Caves
+    act = new Zombie(environments[3], "Bertha");
+    actors.emplace_back(act);
+    environments[3]->enter(act);
+
+    // Mountain range
+    act = new Dragon(environments[10], "Smaug");
+    actors.emplace_back(act);
+    environments[10]->enter(act);
+
+    // Vast Desert
+    act = new Worg(environments[13], "Laika");
+    actors.emplace_back(act);
+    environments[13]->enter(act);
+    act = new Worg(environments[14], "Hugo");
+    actors.emplace_back(act);
+    environments[14]->enter(act);
+    
+    act = new Goblin(environments[17], "Neep");
+    actors.emplace_back(act);
+    environments[17]->enter(act);
+
+    // Final Castle
+    act = new Demon(environments[19], "Tripp");
+    actors.emplace_back(act);
+    environments[19]->enter(act);
+    act = new Demon(environments[21], "Trapp");
+    actors.emplace_back(act);
+    environments[21]->enter(act);
+    act = new Demon(environments[21], "Trull");
+    actors.emplace_back(act);
+    environments[21]->enter(act);
 }
 
 /**
