@@ -3,4 +3,8 @@ go north
 take key
 look
 take key
+look
+take knapsack
+look
+take knapsack
 exit

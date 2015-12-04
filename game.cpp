@@ -40,6 +40,10 @@ void initialise() {
     actors.emplace_back(act);
     environments[2]->enter(act);
 
+    obj = new Knapsack(10, 10);
+    objects.emplace_back(obj);
+    environments[1]->drop(obj);
+
     // Caves
     env = new Cave();
     environments.emplace_back(env);

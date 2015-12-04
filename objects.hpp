@@ -2,6 +2,7 @@
 
 #include <string>
 #include <iostream>
+#include <unordered_set>
 
 namespace text_adventure {
     class Object {
@@ -16,21 +17,30 @@ namespace text_adventure {
                    int const weight, bool const liquid);
             virtual ~Object() = default;
 
-            std::string type();
-            bool is_liquid();
-            int volume();
-            int weight();
+            std::string type() const;
+            bool is_liquid() const;
+            int volume() const;
+            int weight() const;
     };
 
     class Container : public Object {
+        private:
+            bool _holds_liquid;
+            int _max_volume;
+            int _max_weight;
+
+            std::unordered_set<Object *> _objects;
         public:
-            Container();
+            Container(std::string const type, int const vol,
+                      int const weight, bool const liquid,
+                      const int max_volume, const int max_weight,
+                      const bool holds_liquid);
             ~Container() override = default;
 
-            int add(const Object & object);
-            int max_volume();
-            int max_weight();
-            int remove(const Object & object);
+            bool add(Object * const object);
+            int max_volume() const;
+            int max_weight() const;
+            void remove(Object * const object);
     };
 
     class Consumable : public Object {
@@ -53,7 +63,7 @@ namespace text_adventure {
 
     class Knapsack : public Container {
         public:
-            Knapsack();
+            Knapsack(const int max_volume, const int max_weight);
             ~Knapsack() override = default;
     };
 }

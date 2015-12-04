@@ -7,15 +7,15 @@ Actor::Actor(Environment * const room,
              std::string const name)
     : _room(room), _type(type), _name(name) {}
 
-std::string Actor::name() {
+std::string Actor::name() const {
     return _name;
 }
 
-std::string Actor::type() {
+std::string Actor::type() const {
     return _type;
 }
 
-Environment * Actor::get_room() {
+Environment * Actor::get_room() const {
     return _room;
 }
 

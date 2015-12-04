@@ -17,10 +17,10 @@ namespace text_adventure {
             Actor(Environment * const room, std::string const type, std::string const name);
             virtual ~Actor() = default;
 
-            std::string name();
-            std::string type();
+            std::string name() const;
+            std::string type() const;
 
-            Environment * get_room();
+            Environment * get_room() const;
 
             virtual void go(const Direction direction);
             /**
@@ -33,7 +33,7 @@ namespace text_adventure {
     class Human : public Actor {
         private:
             const Object * _hand;
-            // Container * _back; // TODO
+            Container * _back;
 
         public:
             Human(Environment * const room, std::string const type, std::string const name);
@@ -41,13 +41,13 @@ namespace text_adventure {
 
             void go(const Direction direction) override;
             void action() override;
-            void drop(const Object * const object);
+            void drop(Object * const object);
             void fight(Actor * const character);
             /**
              * Try to pick up the given object.
              * Return false if there is no room to pick it up.
              */
-            bool pick_up(const Object * const object);
+            bool pick_up(Object * const object);
             std::string look();
     };
 
