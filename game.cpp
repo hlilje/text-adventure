@@ -56,8 +56,8 @@ void initialise() {
 
     env = new Cave();
     environments.emplace_back(env);
-    environments[3]->add_neighbour(EAST, environments[5]);
-    environments[5]->add_neighbour(WEST, environments[3]);
+    environments[3]->add_neighbour(WEST, environments[5]);
+    environments[5]->add_neighbour(EAST, environments[3]);
 
     env = new Cave();
     environments.emplace_back(env);
@@ -263,8 +263,10 @@ void run() {
             } else {
                 if (!go_to(cmds[1]))
                     std::cout << "Invalid direction." << std::endl;
-                else
+                else {
+                    act();
                     std::cout << player->look();
+                }
             }
         } else if (cmds.size() > 0 && cmds[0] == "take") {
             if (cmds.size() < 2) {
