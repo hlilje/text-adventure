@@ -8,20 +8,52 @@ Human::Human(Environment * const room,
              std::string const name)
     : Actor(room, type, name), _hand(nullptr), _back(nullptr) {}
 
-void Human::go(const Direction direction) {
-    _room = _room->neighbour(direction);
+bool Human::drop(const std::string & item) {
+    // Container on back
+    if (_back != nullptr) {
+        if (!_back->contains(item)) {
+            if (_hand == nullptr) {
+                return false;
+            } else {
+                if (_hand->type() != item)
+                    return false;
+                else
+                    _hand = nullptr;
+            }
+        } else {
+            _back->remove(item);
+        }
+    // Nothing on back
+    } else {
+        if (_hand == nullptr) {
+            return false;
+        } else {
+            if (_hand->type() != item)
+                return false;
+            else
+                _hand = nullptr;
+        }
+    }
+
+    return true;
 }
 
-void Human::action() {
-}
-
-void Human::drop(Object * const object) {
-}
-
-void Human::fight(Actor * const character) {
+void Human::fight(const std::string & character) {
 };
 
-bool Human::pick_up(Object * const object) {
+bool Human::pick_up(const std::string & item) {
+    // Find the object in the current room
+    auto & objects = _room->objects();
+    auto finder = [item](Object * const other) {
+        return other->type() == item;
+    };
+    auto it = std::find_if(objects.begin(), objects.end(), finder);
+
+    if (it == objects.end())
+        return false;
+
+    Object * const object = *it;
+
     // Container on back
     if (_back != nullptr) {
         if (!_back->add(object)) {
@@ -47,6 +79,8 @@ bool Human::pick_up(Object * const object) {
         }
     }
 
+    objects.erase(*it);
+
     return true;
 };
 
@@ -63,4 +97,11 @@ std::string Human::look() {
             sight += "A " + m->type() + " named " + m->name() + "\n";
     }
     return sight;
+}
+
+void Human::go(const Direction direction) {
+    _room = _room->neighbour(direction);
+}
+
+void Human::action() {
 }

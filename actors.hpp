@@ -2,6 +2,7 @@
 
 #include "environments.hpp"
 #include "objects.hpp"
+#include <algorithm>
 #include <string>
 
 
@@ -39,16 +40,21 @@ namespace text_adventure {
             Human(Environment * const room, std::string const type, std::string const name);
             ~Human() override = default;
 
-            void go(const Direction direction) override;
-            void action() override;
-            void drop(Object * const object);
-            void fight(Actor * const character);
+            /**
+             * Try to drop the given object.
+             * Return false if the object is not carried.
+             */
+            bool drop(const std::string & item);
+            void fight(const std::string & character);
             /**
              * Try to pick up the given object.
              * Return false if there is no room to pick it up.
              */
-            bool pick_up(Object * const object);
+            bool pick_up(const std::string & item);
             std::string look();
+
+            void go(const Direction direction) override;
+            void action() override;
     };
 
     class Warrior : public Human {

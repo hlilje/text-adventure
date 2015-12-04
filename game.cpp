@@ -1,13 +1,11 @@
 #include "actors.hpp"
 #include "environments.hpp"
 #include "objects.hpp"
-#include <algorithm>
 #include <iostream>
 #include <sstream>
 #include <vector>
 
 using namespace text_adventure;
-using success = std::pair<bool, bool>;
 
 
 std::vector<Actor *> actors;
@@ -303,34 +301,6 @@ bool go_to(const std::string & direction) {
 }
 
 /**
- * Take the given item.
- * Return a bool pair, the first element is false if the item is invalid,
- * the second item is false if the inventory is full.
- */
-success take_item(const std::string & item) {
-    Environment * room = player->get_room();
-    auto & objects = room->objects();
-    auto finder = [item](Object * const object) {
-        return object->type() == item;
-    };
-    auto it = std::find_if(objects.begin(), objects.end(), finder);
-
-    success succ;
-    succ.first = true;
-    succ.second = true;
-
-    if (it == objects.end()) {
-        succ.first = false;
-    } else {
-        if (!player->pick_up(*it))
-            succ.second = false;
-        objects.erase(*it);
-    }
-
-    return succ;
-}
-
-/**
  * Call all actors' action functions.
  */
 void act() {
@@ -401,17 +371,15 @@ void run() {
             if (cmds.size() < 2) {
                 std::cout << "Take what up?" << std::endl;
             } else {
-                success succ = take_item(cmds[1]);
-                if (!succ.first)
-                    std::cout << "Invalid item." << std::endl;
-                if (!succ.second)
-                    std::cout << "No room to pick it up." << std::endl;
+                if (!player->pick_up(cmds[1]))
+                    std::cout << "You can not pick that up." << std::endl;
             }
         } else if (cmds.size() > 0 && cmds[0] == "drop") {
             if (cmds.size() < 2) {
                 std::cout << "Drop what?" << std::endl;
             } else {
-                act(); // TODO
+                if (!player->drop(cmds[1]))
+                    std::cout << "You do not carry that." << std::endl;
             }
         } else if (cmds.size() > 0 && cmds[0] == "attack") {
             if (cmds.size() < 2) {

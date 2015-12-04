@@ -36,6 +36,18 @@ int Container::max_weight() const {
     return _max_weight;
 }
 
-void Container::remove(Object * const object) {
-    _objects.erase(object);
+bool Container::contains(const std::string & item) const {
+    auto finder = [item](Object * const other) {
+        return other->type() == item;
+    };
+    auto it = std::find_if(_objects.begin(), _objects.end(), finder);
+    return it == _objects.end();
+}
+
+void Container::remove(const std::string & item) {
+    auto finder = [item](Object * const other) {
+        return other->type() == item;
+    };
+    auto it = std::find_if(_objects.begin(), _objects.end(), finder);
+    if (it != _objects.end()) _objects.erase(it);
 }

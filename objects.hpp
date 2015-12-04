@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <string>
 #include <iostream>
 #include <unordered_set>
@@ -40,7 +41,8 @@ namespace text_adventure {
             bool add(Object * const object);
             int max_volume() const;
             int max_weight() const;
-            void remove(Object * const object);
+            bool contains(const std::string & item) const;
+            void remove(const std::string & item);
     };
 
     class Consumable : public Object {
