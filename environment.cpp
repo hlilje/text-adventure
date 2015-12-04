@@ -8,7 +8,7 @@ Environment::Environment() : _neighbours(std::vector<Environment *>(4)) {}
 std::string Environment::description() {
     std::string desc = "You are in a " + type() + ".\n\n";
 
-    if(_actors.empty())
+    if(_objects.empty())
         desc += "The place contains no items.\n\n";
     else {
         desc += "You see the following items:\n";
