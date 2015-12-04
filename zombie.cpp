@@ -8,10 +8,13 @@ Zombie::Zombie(Environment * const room, std::string const name)
 
 void Zombie::action() {
     auto dirs = _room->directions();
-    for(Direction d : dirs) {
-        if(_room->neighbour(d)->type() == "cave")
-            go(d);
+    int i = rand() % dirs.size();
+    Direction d = dirs[i];
+    while(_room->neighbour(d)->type() != "cave") {
+        i = rand() % dirs.size();
+        d = dirs[i];
     }
+    go(d);
 }
 
 void Zombie::fight(Actor * const character) {
