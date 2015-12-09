@@ -104,6 +104,8 @@ namespace text_adventure {
     };
 
     class Dragon : public Creature {
+        private:
+            Direction curr_dir;
         public:
             Dragon(Environment * const room, std::string const name);
             ~Dragon() override = default;

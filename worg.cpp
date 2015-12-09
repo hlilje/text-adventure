@@ -10,4 +10,12 @@ void Worg::action() {
 }
 
 void Worg::fight(Actor * const character) {
+    auto dirs = _room->directions();
+    int i = rand() % dirs.size();
+    Direction d = dirs[i];
+    while(_room->neighbour(d)->type() != "desert") {
+        i = rand() % dirs.size();
+        d = dirs[i];
+    }
+    go(d);
 }
