@@ -1,0 +1,24 @@
+choose warrior
+go n
+take knapsack
+go e
+go n
+go w
+go w
+go w
+take bread
+inventory
+go e
+go n
+go n
+go n
+go e
+go e
+go s
+take mana_potion
+inventory
+consume bread
+inventory
+consume mana_potion
+inventory
+exit
