@@ -146,10 +146,50 @@ void initialise() {
     Object * obj = new Key();
     objects.emplace_back(obj);
     environments[1]->drop(obj);
-
     obj = new Knapsack(10, 10);
     objects.emplace_back(obj);
     environments[1]->drop(obj);
+    obj = new Axe();
+    objects.emplace_back(obj);
+    environments[2]->drop(obj);
+
+    // Cave
+    obj = new ElixirOfInvincibility();
+    objects.emplace_back(obj);
+    environments[4]->drop(obj);
+    obj = new Bread();
+    objects.emplace_back(obj);
+    environments[5]->drop(obj);
+
+    // Hut
+    obj = new Bread();
+    objects.emplace_back(obj);
+    environments[8]->drop(obj);
+    obj = new Katana();
+    objects.emplace_back(obj);
+    environments[8]->drop(obj);
+
+    // Mountain
+    obj = new Bottle(4, 4);
+    objects.emplace_back(obj);
+    environments[9]->drop(obj);
+    obj = new Longsword();
+    objects.emplace_back(obj);
+    environments[11]->drop(obj);
+
+    // Desert
+    obj = new ManaPotion();
+    objects.emplace_back(obj);
+    environments[15]->drop(obj);
+
+    // Castle
+    obj = new Pancakes();
+    objects.emplace_back(obj);
+    environments[18]->drop(obj);
+    obj = new Shotgun();
+    objects.emplace_back(obj);
+    environments[20]->drop(obj);
+
 
     /**
      * Spawn monsters.
