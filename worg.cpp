@@ -7,9 +7,6 @@ Worg::Worg(Environment * const room, std::string const name)
     : Creature(room, "worg", name) {}
 
 void Worg::action() {
-}
-
-void Worg::fight(Actor * const character) {
     auto dirs = _room->directions();
     int i = rand() % dirs.size();
     Direction d = dirs[i];
@@ -18,4 +15,7 @@ void Worg::fight(Actor * const character) {
         d = dirs[i];
     }
     go(d);
+}
+
+void Worg::fight(Actor * const character) {
 }

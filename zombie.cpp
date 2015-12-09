@@ -7,8 +7,11 @@ Zombie::Zombie(Environment * const room, std::string const name)
     : Humanoid(room, "zombie", name) {}
 
 void Zombie::action() {
+    int i = rand() % 100;
+    if(i > 50) return;
+
     auto dirs = _room->directions();
-    int i = rand() % dirs.size();
+    i = rand() % dirs.size();
     Direction d = dirs[i];
     while(_room->neighbour(d)->type() != "cave") {
         i = rand() % dirs.size();
