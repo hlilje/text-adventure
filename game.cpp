@@ -206,9 +206,9 @@ void initialise() {
     environments[3]->enter(act);
 
     // Mountain range
-    act = new Dragon(environments[10], "Smaug");
-    actors.emplace_back(act);
-    environments[10]->enter(act);
+    Dragon * dragon = new Dragon(environments[10], "Smaug");
+    actors.emplace_back(dragon);
+    environments[10]->enter(dragon);
 
     // Vast Desert
     act = new Worg(environments[13], "Laika");
