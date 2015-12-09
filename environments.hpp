@@ -28,7 +28,7 @@ namespace text_adventure {
             std::string description();
             std::unordered_set<Actor *> const & monsters();
             void add_neighbour(Direction dir, Environment * const room);
-            std::unordered_set<Object *> & objects();
+            std::unordered_set<Object *> const & objects() const;
 
             virtual std::vector<Direction> directions();
             virtual Environment * neighbour(const Direction dir);

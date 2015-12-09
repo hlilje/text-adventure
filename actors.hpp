@@ -55,6 +55,7 @@ namespace text_adventure {
 
             void go(const Direction direction) override;
             void action() override;
+            std::string items();
     };
 
     class Warrior : public Human {

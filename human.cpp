@@ -83,7 +83,7 @@ bool Human::pick_up(const std::string & item) {
         }
     }
 
-    objects.erase(*it);
+    _room->pick_up(*it);
 
     return true;
 };
@@ -101,6 +101,44 @@ std::string Human::look() {
             sight += "A " + m->type() + " named " + m->name() + "\n";
     }
     return sight;
+}
+
+std::string Human::items() {
+    if(_hand == nullptr && _back == nullptr)
+        return "You aren't carrying any items.\n";
+
+    std::string inv;
+    if(_hand != nullptr) {
+        inv += "You are holding a " + _hand->type()
+            + " (" + std::to_string(_hand->weight())
+            + "kg, " + std::to_string(_hand->volume())
+            + "l) in your hand.\n";
+
+        if(_back != nullptr) inv += "\n";
+    }
+
+    if(_back != nullptr) {
+        inv += "You are carrying a " + _back->type()
+            + " (" + std::to_string(_back->weight())
+            + "kg, " + std::to_string(_back->volume())
+            + "l) on your back.\n"
+            + "It has a capacity of "
+            + std::to_string(_back->max_volume()) + "l and "
+            + std::to_string(_back->max_weight()) + "kg.\n";
+
+        auto contents = _back->contents();
+        if(contents.empty())
+            inv += "It contains no items.\n";
+        else {
+            inv += "It contains the following items:\n";
+            for(auto it : contents)
+                inv += "A " + it->type()
+                    + " (" + std::to_string(it->weight())
+                    + "kg, " + std::to_string(it->volume()) + "l)\n";
+        }
+    }
+
+    return inv;
 }
 
 void Human::go(const Direction direction) {

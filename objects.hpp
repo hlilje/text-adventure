@@ -48,6 +48,9 @@ namespace text_adventure {
              * Return nullptr if no such type exists.
              */
             Object * find(const std::string & type) const;
+            int max_volume() const;
+            int max_weight() const;
+            std::unordered_set<Object *> const & contents() const;
     };
 
     class Consumable : public Object {

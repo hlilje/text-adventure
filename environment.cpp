@@ -38,7 +38,7 @@ std::unordered_set<Actor *> const & Environment::monsters() {
     return _actors;
 }
 
-std::unordered_set<Object *> & Environment::objects() {
+std::unordered_set<Object *> const & Environment::objects() const {
     return _objects;
 }
 

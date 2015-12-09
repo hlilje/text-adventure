@@ -43,3 +43,15 @@ Object * Container::find(const std::string & type) const {
     else
         return nullptr;
 }
+
+int Container::max_volume() const {
+    return _max_volume;
+}
+
+int Container::max_weight() const {
+    return _max_weight;
+}
+
+std::unordered_set<Object *> const & Container::contents() const {
+    return _objects;
+}

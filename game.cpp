@@ -226,6 +226,7 @@ void print_help() {
     << "- choose <class>:     Select class before starting the game.\n"
     << "- help: Get this information.\n"
     << "- look: Get information about your surroundings.\n"
+    << "- inventory: Get information about items you are carrying.\n"
     << "- exit: Exit the game.\n"
     << std::endl;
 }
@@ -391,6 +392,8 @@ void run() {
             std::cout << "You may not change your class." << std::endl;
         } else if (cmd == "look") {
             std::cout << player->look();
+        } else if (cmd == "inventory") {
+            std::cout << player->items();
         } else if (cmd == "") {
             // Ignore
         } else {
