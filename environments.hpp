@@ -29,13 +29,13 @@ namespace text_adventure {
             std::unordered_set<Actor *> const & monsters();
             void add_neighbour(Direction dir, Environment * const room);
             std::unordered_set<Object *> const & objects() const;
+            std::vector<Direction> directions();
+            Environment * neighbour(const Direction dir);
+            void enter(Actor * const character);
+            void exit(Actor * const character);
+            void pick_up(Object * const object);
+            void drop(Object * const object);
 
-            virtual std::vector<Direction> directions();
-            virtual Environment * neighbour(const Direction dir);
-            virtual void enter(Actor * const character);
-            virtual void exit(Actor * const character);
-            virtual void pick_up(Object * const object);
-            virtual void drop(Object * const object);
             virtual std::string type() = 0;
     };
 
