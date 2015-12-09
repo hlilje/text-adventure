@@ -1,4 +1,4 @@
-choose warrior
+choose wizard
 go n
 take knapsack
 go e
@@ -17,8 +17,11 @@ go e
 go s
 take mana_potion
 inventory
+stats
 consume bread
+stats
 inventory
 consume mana_potion
+stats
 inventory
 exit
