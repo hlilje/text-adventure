@@ -268,6 +268,7 @@ void print_help() {
     << "- help: Get this information.\n"
     << "- look: Get information about your surroundings.\n"
     << "- inventory: Get information about items you are carrying.\n"
+    << "- stats: Get information about your current stats.\n"
     << "- exit: Exit the game.\n"
     << std::endl;
 }
@@ -442,6 +443,8 @@ void run() {
             std::cout << player->look();
         } else if (cmd == "inventory" || cmd == "inv") {
             std::cout << player->items();
+        } else if (cmd == "stats") {
+            std::cout << player->statistics();
         } else if (cmd == "") {
             // Ignore
         } else {

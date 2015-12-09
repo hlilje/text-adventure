@@ -176,6 +176,14 @@ std::string Human::items() {
     return inv;
 }
 
+std::string Human::statistics() const {
+    std::string stats = "You are a " + _type + " named " + _name + ".\n";
+    stats += "You do " + std::to_string(_attack_damage) + " damage without a weapon.\n";
+    stats += "You currently have " + std::to_string(_health) + " health points.\n";
+    if(_invincible) stats += "You cannot be harmed!\n";
+    return stats;
+}
+
 void Human::go(const Direction direction) {
     _room = _room->neighbour(direction);
 }

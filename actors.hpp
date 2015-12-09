@@ -55,6 +55,7 @@ namespace text_adventure {
              * Return false if it is not in inventory.
              */
             virtual bool consume(const std::string & consumable);
+            virtual std::string statistics() const;
 
             /**
              * Try to drop the given object.
@@ -94,6 +95,7 @@ namespace text_adventure {
             void action() override;
             void fight(Actor * const character) override;
             bool consume(const std::string & consumable) override;
+            std::string statistics() const override;
     };
 
     class Peasant : public Human {

@@ -13,6 +13,12 @@ void Wizard::action() {
 void Wizard::fight(Actor * const character) {
 };
 
+std::string Wizard::statistics() const {
+    std::string stats = Human::statistics();
+    stats += "You have " + std::to_string(_mana) + " mana points.\n";
+    return stats;
+}
+
 bool Wizard::consume(const std::string & consumable) {
     // TODO: More logic
     Object * object = _back != nullptr ? _back->find(consumable) : _hand;
