@@ -4,7 +4,7 @@ using namespace text_adventure;
 
 
 Zombie::Zombie(Environment * const room, std::string const name)
-    : Humanoid(room, "zombie", name) {}
+    : Humanoid(50, 10, room, "zombie", name) {}
 
 void Zombie::action() {
     int i = rand() % 100;

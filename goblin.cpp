@@ -4,7 +4,7 @@ using namespace text_adventure;
 
 
 Goblin::Goblin(Environment * const room, std::string const name)
-    : Humanoid(room, "goblin", name) {}
+    : Humanoid(100, 20, room, "goblin", name) {}
 
 void Goblin::action() {
     auto dirs = _room->directions();

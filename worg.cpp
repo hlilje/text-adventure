@@ -4,7 +4,7 @@ using namespace text_adventure;
 
 
 Worg::Worg(Environment * const room, std::string const name)
-    : Creature(room, "worg", name) {}
+    : Creature(100, 20, room, "worg", name) {}
 
 void Worg::action() {
     auto dirs = _room->directions();

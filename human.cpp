@@ -3,10 +3,45 @@
 using namespace text_adventure;
 
 
-Human::Human(Environment * const room,
+Human::Human(int const health, int const attack_damage,
+             Environment * const room,
              std::string const type,
              std::string const name)
-    : Actor(room, type, name), _hand(nullptr), _back(nullptr) {}
+    : Actor(health, attack_damage, room, type, name),
+      _hand(nullptr), _back(nullptr) {}
+
+void Human::consume_object(Object * const object) {
+    if (Food * const food = dynamic_cast<Food *>(object)) {
+        _health += food->health();
+    // Virtual Wizard function increases mana
+    } else if (Potion * const potion = dynamic_cast<Potion *>(object)) {
+        if (potion->type() == "elixir_of_invincibility") {
+            _invincible = true;
+        } else {
+            _health += potion->health();
+        }
+    }
+}
+
+bool Human::consume(const std::string & consumable) {
+    Object * object = _back != nullptr ? _back->find(consumable) : nullptr;
+
+    // On back
+    if (object != nullptr) {
+        consume_object(object);
+        _back->remove(object);
+    // Maybe in hand
+    } else if ((object = _hand)) { // Assignment
+        Consumable * const cons = dynamic_cast<Consumable *>(object);
+        if (!cons) return false;
+        consume_object(object);
+        _hand = nullptr;
+    } else {
+        return false;
+    }
+
+    return true;
+}
 
 bool Human::drop(const std::string & item) {
     Object * object = _back != nullptr ? _back->find(item) : _hand;

@@ -5,7 +5,7 @@ using namespace text_adventure;
 
 Warrior::Warrior(Environment * const room,
                  std::string const name)
-    : Human(room, "warrior", name) {}
+    : Human(300, 10, room, "warrior", name) {}
 
 void Warrior::action() {
 }

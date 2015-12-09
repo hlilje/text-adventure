@@ -4,7 +4,7 @@ using namespace text_adventure;
 
 
 Dragon::Dragon(Environment * const room, std::string const name)
-    : Creature(room, "dragon", name), curr_dir(SOUTH) {}
+    : Creature(1000, 100, room, "dragon", name), curr_dir(SOUTH) {}
 
 void Dragon::action() {
     auto dirs = _room->directions();

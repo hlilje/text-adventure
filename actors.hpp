@@ -10,12 +10,16 @@ namespace text_adventure {
     class Actor {
         protected:
             int _health;
+            const int _attack_damage;
+            bool _invincible;
             Environment * _room;
             std::string _type;
             std::string _name;
 
         public:
-            Actor(Environment * const room, std::string const type, std::string const name);
+            Actor(int const health, int const attack_damage,
+                  Environment * const room, std::string const type,
+                  std::string const name);
             virtual ~Actor() = default;
 
             std::string name() const;
@@ -32,13 +36,25 @@ namespace text_adventure {
     };
 
     class Human : public Actor {
-        private:
+        protected:
             Object * _hand;
             Container * _back;
 
         public:
-            Human(Environment * const room, std::string const type, std::string const name);
+            Human(int const health, int const attack_damage,
+                  Environment * const room, std::string const type,
+                  std::string const name);
             ~Human() override = default;
+
+            /**
+             * Helper function to update stats from consumable.
+             */
+            void consume_object(Object * const object);
+            /**
+             * Try to consume the given consumable.
+             * Return false if it is not in inventory.
+             */
+            virtual bool consume(const std::string & consumable);
 
             /**
              * Try to drop the given object.
@@ -52,10 +68,10 @@ namespace text_adventure {
              */
             bool pick_up(const std::string & item);
             std::string look();
+            std::string items();
 
             void go(const Direction direction) override;
             void action() override;
-            std::string items();
     };
 
     class Warrior : public Human {
@@ -68,12 +84,16 @@ namespace text_adventure {
     };
 
     class Wizard : public Human {
+        private:
+            int _mana;
+
         public:
             Wizard(Environment * const room, std::string const name);
             ~Wizard() override = default;
 
             void action() override;
             void fight(Actor * const character) override;
+            bool consume(const std::string & consumable) override;
     };
 
     class Peasant : public Human {
@@ -87,7 +107,9 @@ namespace text_adventure {
 
     class Creature : public Actor {
         public:
-            Creature(Environment * const room, std::string const type, std::string const name);
+            Creature(int const health, int const attack_damage,
+                     Environment * const room, std::string const type,
+                     std::string const name);
             ~Creature() override = default;
 
             void action() override;
@@ -125,7 +147,9 @@ namespace text_adventure {
 
     class Humanoid : public Actor {
         public:
-            Humanoid(Environment * const room, std::string const type, std::string const name);
+            Humanoid(int const health, int const attack_damage,
+                     Environment * const room, std::string const type,
+                     std::string const name);
             ~Humanoid() override = default;
 
             void action() override;

@@ -3,10 +3,12 @@
 using namespace text_adventure;
 
 
-Creature::Creature(Environment * const room,
+Creature::Creature(int const health,
+                   int const attack_damage,
+                   Environment * const room,
                    std::string const type,
                    std::string const name)
-    : Actor(room, type, name) {}
+    : Actor(health, attack_damage, room, type, name) {}
 
 void Creature::action() {
 }

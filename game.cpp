@@ -259,11 +259,12 @@ void print_greeting() {
 void print_help() {
     std::cout
     << "Commands:\n"
-    << "- go     <direction>: Go to the direction.\n"
-    << "- attack <enemy>:     Attack the enemy.\n"
-    << "- take   <item>:      Take the item.\n"
-    << "- drop   <item>:      Drop the item.\n"
-    << "- choose <class>:     Select class before starting the game.\n"
+    << "- go      <direction>:  Go to the direction.\n"
+    << "- attack  <enemy>:      Attack the enemy.\n"
+    << "- take    <item>:       Take the item.\n"
+    << "- drop    <item>:       Drop the item.\n"
+    << "- choose  <class>:      Select class before starting the game.\n"
+    << "- consume <consumable>: Consume the consumable.\n"
     << "- help: Get this information.\n"
     << "- look: Get information about your surroundings.\n"
     << "- inventory: Get information about items you are carrying.\n"
@@ -428,11 +429,18 @@ void run() {
             } else {
                 act(); // TODO
             }
+        } else if (cmds.size() > 0 && cmds[0] == "consume") {
+            if (cmds.size() < 2) {
+                std::cout << "Consume what?" << std::endl;
+            } else {
+                if (!player->consume(cmds[1]))
+                    std::cout << "You can not consume that." << std::endl;
+            }
         } else if (cmd == "choose" || (cmds.size() > 0 && cmds[0] == "choose")) {
             std::cout << "You may not change your class." << std::endl;
         } else if (cmd == "look") {
             std::cout << player->look();
-        } else if (cmd == "inventory") {
+        } else if (cmd == "inventory" || cmd == "inv") {
             std::cout << player->items();
         } else if (cmd == "") {
             // Ignore
