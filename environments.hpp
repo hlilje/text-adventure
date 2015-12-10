@@ -8,6 +8,7 @@
 
 namespace text_adventure {
     enum Direction {NORTH, EAST, SOUTH, WEST};
+    enum Weather {SUNNY, RAINY, WINDY};
 
     class Actor;
 
@@ -40,11 +41,18 @@ namespace text_adventure {
     };
 
     class Outdoor : public Environment {
+        private:
+            Weather _weather;
+
         public:
             Outdoor();
             ~Outdoor() override = default;
 
-            virtual void weather();
+            std::string weather();
+            /**
+             * Update the environment, such as its weather.
+             */
+            void update();
     };
 
     class Forest : public Outdoor {

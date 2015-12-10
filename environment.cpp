@@ -8,6 +8,9 @@ Environment::Environment() : _neighbours(std::vector<Environment *>(4)) {}
 std::string Environment::description() {
     std::string desc = "You are in a " + type() + ".\n\n";
 
+    if (Outdoor * const outdoor = dynamic_cast<Outdoor *>(this))
+        desc += "The weather is " + outdoor->weather() + ".\n\n";
+
     if(_objects.empty())
         desc += "The place contains no items.\n\n";
     else {

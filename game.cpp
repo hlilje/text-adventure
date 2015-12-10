@@ -1,6 +1,7 @@
 #include "actors.hpp"
 #include "environments.hpp"
 #include "objects.hpp"
+#include <ctime>
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -17,6 +18,8 @@ Human * player;
  * Initialise the playable game.
  */
 void initialise() {
+    std::srand(std::time(0));
+
     /**
      * Create world.
      */
@@ -360,6 +363,11 @@ void act() {
         std::string a = actor->action();
         if(a != "")
             std::cout << "*** " << a << " ***\n" << std::endl;
+    }
+
+    for (const auto & environment : environments) {
+        if (Outdoor * const outdoor = dynamic_cast<Outdoor *>(environment))
+            outdoor->update();
     }
 }
 
