@@ -373,6 +373,9 @@ bool go_to(const std::string & direction) {
  */
 void act() {
     for (const auto & actor : actors) {
+        if(actor->is_dead())
+            continue;
+
         std::string a = actor->action();
         if(a != "")
             std::cout << "*** " << a << " ***\n" << std::endl;

@@ -118,7 +118,7 @@ bool Human::pick_up(const std::string & item) {
     _room->pick_up(*it);
 
     return true;
-};
+}
 
 std::string Human::look() {
     std::string sight = _room->description() + "\n";
@@ -130,8 +130,13 @@ std::string Human::look() {
     else {
         sight += "There are the following monsters here:\n";
         for(Actor * const m : monsters)
-            if(m != this)
-                sight += "A " + m->type() + " named " + m->name() + "\n";
+            if(m != this) {
+                if(m->is_dead())
+                    sight += "The corpse of a ";
+                else
+                    sight += "A ";
+                sight += m->type() + " named " + m->name() + "\n";
+            }
     }
     return sight;
 }
