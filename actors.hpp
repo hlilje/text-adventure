@@ -31,8 +31,8 @@ namespace text_adventure {
             /**
              * Make the actor act.
              */
-            virtual void action() = 0;
-            virtual void fight(Actor * const character) = 0;
+            virtual std::string action() = 0;
+            virtual std::string fight(Actor * const character) = 0;
     };
 
     class Human : public Actor {
@@ -62,7 +62,7 @@ namespace text_adventure {
              * Return false if the object is not carried.
              */
             bool drop(const std::string & item);
-            void fight(const std::string & character);
+            std::string fight(const std::string & character);
             /**
              * Try to pick up the given object.
              * Return false if there is no room to pick it up.
@@ -72,7 +72,7 @@ namespace text_adventure {
             std::string items();
 
             void go(const Direction direction) override;
-            void action() override;
+            std::string action() override;
     };
 
     class Warrior : public Human {
@@ -80,8 +80,8 @@ namespace text_adventure {
             Warrior(Environment * const room, std::string const name);
             ~Warrior() override = default;
 
-            void action() override;
-            void fight(Actor * const character) override;
+            std::string action() override;
+            std::string fight(Actor * const character) override;
     };
 
     class Wizard : public Human {
@@ -92,8 +92,8 @@ namespace text_adventure {
             Wizard(Environment * const room, std::string const name);
             ~Wizard() override = default;
 
-            void action() override;
-            void fight(Actor * const character) override;
+            std::string action() override;
+            std::string fight(Actor * const character) override;
             bool consume(const std::string & consumable) override;
             std::string statistics() const override;
     };
@@ -103,8 +103,8 @@ namespace text_adventure {
             Peasant(Environment * const room, std::string const name);
             ~Peasant() override = default;
 
-            void action() override;
-            void fight(Actor * const character) override;
+            std::string action() override;
+            std::string fight(Actor * const character) override;
     };
 
     class Creature : public Actor {
@@ -114,8 +114,8 @@ namespace text_adventure {
                      std::string const name);
             ~Creature() override = default;
 
-            void action() override;
-            void fight(Actor * const character) override;
+            std::string action() override;
+            std::string fight(Actor * const character) override;
     };
 
     class Hedgehog : public Creature {
@@ -123,8 +123,8 @@ namespace text_adventure {
             Hedgehog(Environment * const room, std::string const name);
             ~Hedgehog() override = default;
 
-            void action() override;
-            void fight(Actor * const character) override;
+            std::string action() override;
+            std::string fight(Actor * const character) override;
     };
 
     class Dragon : public Creature {
@@ -134,8 +134,8 @@ namespace text_adventure {
             Dragon(Environment * const room, std::string const name);
             ~Dragon() override = default;
 
-            void action() override;
-            void fight(Actor * const character) override;
+            std::string action() override;
+            std::string fight(Actor * const character) override;
     };
 
     class Worg : public Creature {
@@ -143,8 +143,8 @@ namespace text_adventure {
             Worg(Environment * const room, std::string const name);
             ~Worg() override = default;
 
-            void action() override;
-            void fight(Actor * const character) override;
+            std::string action() override;
+            std::string fight(Actor * const character) override;
     };
 
     class Humanoid : public Actor {
@@ -154,8 +154,8 @@ namespace text_adventure {
                      std::string const name);
             ~Humanoid() override = default;
 
-            void action() override;
-            void fight(Actor * const character) override;
+            std::string action() override;
+            std::string fight(Actor * const character) override;
     };
 
     class Demon : public Humanoid {
@@ -163,8 +163,8 @@ namespace text_adventure {
             Demon(Environment * const room, std::string const name);
             ~Demon() override = default;
 
-            void action() override;
-            void fight(Actor * const character) override;
+            std::string action() override;
+            std::string fight(Actor * const character) override;
     };
 
     class Goblin : public Humanoid {
@@ -172,8 +172,8 @@ namespace text_adventure {
             Goblin(Environment * const room, std::string const name);
             ~Goblin() override = default;
 
-            void action() override;
-            void fight(Actor * const character) override;
+            std::string action() override;
+            std::string fight(Actor * const character) override;
     };
 
     class Zombie : public Humanoid {
@@ -181,7 +181,7 @@ namespace text_adventure {
             Zombie(Environment * const room, std::string const name);
             ~Zombie() override = default;
 
-            void action() override;
-            void fight(Actor * const character) override;
+            std::string action() override;
+            std::string fight(Actor * const character) override;
     };
 }

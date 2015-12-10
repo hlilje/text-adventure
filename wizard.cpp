@@ -7,11 +7,13 @@ Wizard::Wizard(Environment * const room,
                std::string const name)
     : Human(150, 5, room, "wizard", name), _mana(100) {}
 
-void Wizard::action() {
+std::string Wizard::action() {
+    return "";
 }
 
-void Wizard::fight(Actor * const character) {
-};
+std::string Wizard::fight(Actor * const character) {
+    return "";
+}
 
 std::string Wizard::statistics() const {
     std::string stats = Human::statistics();

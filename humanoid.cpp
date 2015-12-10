@@ -10,8 +10,10 @@ Humanoid::Humanoid(int const health,
                    std::string const name)
     : Actor(health, attack_damage, room, type, name) {}
 
-void Humanoid::action() {
+std::string Humanoid::action() {
+    return "";
 }
 
-void Humanoid::fight(Actor * const character) {
-};
+std::string Humanoid::fight(Actor * const character) {
+    return "";
+}

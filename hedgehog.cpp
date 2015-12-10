@@ -6,7 +6,7 @@ using namespace text_adventure;
 Hedgehog::Hedgehog(Environment * const room, std::string const name)
     : Creature(10, 1, room, "hedgehog", name) {}
 
-void Hedgehog::action() {
+std::string Hedgehog::action() {
     auto dirs = _room->directions();
     for(Direction d : dirs) {
         if(_room->neighbour(d)->type() == "forest") {
@@ -14,7 +14,9 @@ void Hedgehog::action() {
             break;
         }
     }
+    return "";
 }
 
-void Hedgehog::fight(Actor * const character) {
+std::string Hedgehog::fight(Actor * const character) {
+    return "";
 }

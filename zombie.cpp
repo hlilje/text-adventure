@@ -6,9 +6,9 @@ using namespace text_adventure;
 Zombie::Zombie(Environment * const room, std::string const name)
     : Humanoid(50, 10, room, "zombie", name) {}
 
-void Zombie::action() {
+std::string Zombie::action() {
     int i = rand() % 100;
-    if(i > 50) return;
+    if(i > 50) return "";
 
     auto dirs = _room->directions();
     i = rand() % dirs.size();
@@ -18,7 +18,9 @@ void Zombie::action() {
         d = dirs[i];
     }
     go(d);
+    return "";
 }
 
-void Zombie::fight(Actor * const character) {
+std::string Zombie::fight(Actor * const character) {
+    return "";
 }

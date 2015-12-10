@@ -7,8 +7,10 @@ Peasant::Peasant(Environment * const room,
                  std::string const name)
     : Human(50, 1, room, "peasant", name) {}
 
-void Peasant::action() {
+std::string Peasant::action() {
+    return "";
 }
 
-void Peasant::fight(Actor * const character) {
-};
+std::string Peasant::fight(Actor * const character) {
+    return "";
+}

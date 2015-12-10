@@ -6,7 +6,7 @@ using namespace text_adventure;
 Goblin::Goblin(Environment * const room, std::string const name)
     : Humanoid(100, 20, room, "goblin", name) {}
 
-void Goblin::action() {
+std::string Goblin::action() {
     auto dirs = _room->directions();
     for(Direction d : dirs) {
         auto next_room = _room->neighbour(d);
@@ -22,7 +22,9 @@ void Goblin::action() {
             }
         }
     }
+    return "";
 }
 
-void Goblin::fight(Actor * const character) {
+std::string Goblin::fight(Actor * const character) {
+    return "";
 }

@@ -6,8 +6,10 @@ using namespace text_adventure;
 Demon::Demon(Environment * const room, std::string const name)
     : Humanoid(200, 30, room, "demon", name) {}
 
-void Demon::action() {
+std::string Demon::action() {
+    return "";
 }
 
-void Demon::fight(Actor * const character) {
+std::string Demon::fight(Actor * const character) {
+    return "";
 }

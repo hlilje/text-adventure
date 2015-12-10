@@ -6,13 +6,13 @@ using namespace text_adventure;
 Dragon::Dragon(Environment * const room, std::string const name)
     : Creature(1000, 100, room, "dragon", name), curr_dir(SOUTH) {}
 
-void Dragon::action() {
+std::string Dragon::action() {
     auto dirs = _room->directions();
 
     if(std::find(dirs.begin(), dirs.end(), curr_dir) != dirs.end()
     && _room->neighbour(curr_dir)->type() == "mountain") {
         go(curr_dir);
-        return;
+        return "";
     }
 
     for(Direction d : dirs) {
@@ -22,7 +22,9 @@ void Dragon::action() {
             break;
         }
     }
+    return "";
 }
 
-void Dragon::fight(Actor * const character) {
+std::string Dragon::fight(Actor * const character) {
+    return "";
 }

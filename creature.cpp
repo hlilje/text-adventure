@@ -10,8 +10,10 @@ Creature::Creature(int const health,
                    std::string const name)
     : Actor(health, attack_damage, room, type, name) {}
 
-void Creature::action() {
+std::string Creature::action() {
+    return "";
 }
 
-void Creature::fight(Actor * const character) {
+std::string Creature::fight(Actor * const character) {
+    return "";
 };
