@@ -71,7 +71,6 @@ namespace text_adventure {
             std::string look();
             std::string items();
 
-            void go(const Direction direction) override;
     };
 
     class Warrior : public Human {

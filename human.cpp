@@ -181,7 +181,3 @@ std::string Human::statistics() const {
     return stats;
 }
 
-void Human::go(const Direction direction) {
-    _room = _room->neighbour(direction);
-}
-
