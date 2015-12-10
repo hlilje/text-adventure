@@ -298,7 +298,7 @@ void print_prompt() {
 void print_game_over() {
     std::cout
         << "========================================================\n"
-        << "|                     ~ GAME OVER ~                    |\n"
+        << "|                    ~ GAME OVER ~                     |\n"
         << "|                                                      |\n"
         << "| You died. Your adventure ends here.                  |\n"
         << "========================================================\n"
@@ -436,12 +436,6 @@ void run() {
             continue;
         }
 
-        // Failure state
-        if (player->is_dead()) {
-            print_game_over();
-            break;
-        }
-
         // General gameplay
         if (cmds.size() > 0 && cmds[0] == "go") {
             if (cmds.size() < 2) {
@@ -495,6 +489,13 @@ void run() {
             std::cout << "I don't know what '" << cmd << "' means." << std::endl;
         }
         std::cout << std::endl;
+
+        // Check for failure state
+        if (player->is_dead()) {
+            print_game_over();
+            break;
+        }
+
         print_prompt();
     }
 }
