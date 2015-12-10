@@ -62,7 +62,7 @@ namespace text_adventure {
              * Return false if the object is not carried.
              */
             bool drop(const std::string & item);
-            std::string fight(const std::string & character);
+
             /**
              * Try to pick up the given object.
              * Return false if there is no room to pick it up.
@@ -72,7 +72,6 @@ namespace text_adventure {
             std::string items();
 
             void go(const Direction direction) override;
-            std::string action() override;
     };
 
     class Warrior : public Human {
@@ -113,9 +112,6 @@ namespace text_adventure {
                      Environment * const room, std::string const type,
                      std::string const name);
             ~Creature() override = default;
-
-            std::string action() override;
-            std::string fight(Actor * const character) override;
     };
 
     class Hedgehog : public Creature {
@@ -153,9 +149,6 @@ namespace text_adventure {
                      Environment * const room, std::string const type,
                      std::string const name);
             ~Humanoid() override = default;
-
-            std::string action() override;
-            std::string fight(Actor * const character) override;
     };
 
     class Demon : public Humanoid {

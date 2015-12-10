@@ -77,10 +77,6 @@ bool Human::drop(const std::string & item) {
     return true;
 }
 
-std::string Human::fight(const std::string & character) {
-    return "";
-}
-
 bool Human::pick_up(const std::string & item) {
     // Find the object in the current room
     auto & objects = _room->objects();
@@ -189,6 +185,3 @@ void Human::go(const Direction direction) {
     _room = _room->neighbour(direction);
 }
 
-std::string Human::action() {
-    return "";
-}
