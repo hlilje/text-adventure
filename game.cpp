@@ -277,11 +277,11 @@ void print_help() {
     << "- drop    <item>:       Drop the item.\n"
     << "- choose  <class>:      Select class before starting the game.\n"
     << "- consume <consumable>: Consume the consumable.\n"
-    << "- help: Get this information.\n"
-    << "- look: Get information about your surroundings.\n"
+    << "- help:      Get this information.\n"
+    << "- look:      Get information about your surroundings.\n"
     << "- inventory: Get information about items you are carrying.\n"
-    << "- stats: Get information about your current stats.\n"
-    << "- exit: Exit the game.\n"
+    << "- stats:     Get information about your current stats.\n"
+    << "- exit:      Exit the game.\n"
     << std::endl;
 }
 
