@@ -161,6 +161,14 @@ void initialise() {
     objects.emplace_back(obj);
     environments[5]->drop(obj);
 
+    // Forest
+    Bottle * bottle = new Bottle(2, 2);
+    obj = new Key();
+    bottle->add(obj);
+    obj = bottle;
+    objects.emplace_back(obj);
+    environments[7]->drop(obj);
+
     // Hut
     obj = new Bread();
     objects.emplace_back(obj);

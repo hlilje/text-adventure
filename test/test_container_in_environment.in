@@ -1,0 +1,14 @@
+choose wizard
+go n
+take knapsack
+go e
+go n
+go w
+go w
+take bottle
+inv
+drop knapsack
+inv
+take knapsack
+inv
+exit
