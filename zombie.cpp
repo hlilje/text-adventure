@@ -29,7 +29,6 @@ std::string Zombie::action() {
 }
 
 std::string Zombie::fight(Actor * const character) {
-    int dmg = 10;
-    character->take_damage(dmg);
-    return _name + " hits you for " + std::to_string(dmg) + " damage.";
+    character->take_damage(_attack_damage);
+    return _name + " hits you for " + std::to_string(_attack_damage) + " damage.";
 }
