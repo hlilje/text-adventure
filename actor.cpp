@@ -28,3 +28,12 @@ void Actor::go(const Direction direction) {
     new_room->enter(this);
     _room = new_room;
 }
+
+void Actor::take_damage(int dmg) {
+    if(_health > 0)
+        _health -= dmg;
+}
+
+bool Actor::is_dead() const {
+    return _health <= 0;
+}

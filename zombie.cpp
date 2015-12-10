@@ -7,6 +7,13 @@ Zombie::Zombie(Environment * const room, std::string const name)
     : Humanoid(50, 10, room, "zombie", name) {}
 
 std::string Zombie::action() {
+    Human * human = nullptr;
+    for(Actor * actor : _room->monsters()) {
+        if((human = dynamic_cast<Human *>(actor))) {
+            return fight(actor);
+        }
+    }
+
     int i = rand() % 100;
     if(i > 50) return "";
 
@@ -22,5 +29,7 @@ std::string Zombie::action() {
 }
 
 std::string Zombie::fight(Actor * const character) {
-    return "";
+    int dmg = 10;
+    character->take_damage(dmg);
+    return _name + " hits you for " + std::to_string(dmg) + " damage.";
 }

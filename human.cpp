@@ -125,12 +125,13 @@ std::string Human::look() {
 
     auto monsters = _room->monsters();
 
-    if(monsters.empty())
+    if(monsters.empty() || (monsters.size() == 1 && monsters.count(this) > 0))
         sight += "There is noone else here.\n";
     else {
         sight += "There are the following monsters here:\n";
         for(Actor * const m : monsters)
-            sight += "A " + m->type() + " named " + m->name() + "\n";
+            if(m != this)
+                sight += "A " + m->type() + " named " + m->name() + "\n";
     }
     return sight;
 }

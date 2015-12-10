@@ -24,7 +24,8 @@ namespace text_adventure {
 
             std::string name() const;
             std::string type() const;
-
+            void take_damage(int damage);
+            bool is_dead() const;
             Environment * get_room() const;
 
             virtual void go(const Direction direction);
