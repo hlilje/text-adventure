@@ -356,8 +356,11 @@ bool go_to(const std::string & direction) {
  * Call all actors' action functions.
  */
 void act() {
-    for (const auto & actor : actors)
-        actor->action();
+    for (const auto & actor : actors) {
+        std::string a = actor->action();
+        if(a != "")
+            std::cout << "*** " << a << " ***\n" << std::endl;
+    }
 }
 
 /**
