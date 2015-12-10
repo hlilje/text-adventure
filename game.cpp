@@ -164,6 +164,7 @@ void initialise() {
     // Forest
     Bottle * bottle = new Bottle(2, 2);
     obj = new Key();
+    objects.emplace_back(obj);
     bottle->add(obj);
     obj = bottle;
     objects.emplace_back(obj);
