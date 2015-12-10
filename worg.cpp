@@ -14,6 +14,14 @@ std::string Worg::action() {
         }
     }
 
+    if(Outdoor * env = dynamic_cast<Outdoor *>(_room)) {
+        if(env->weather() == "windy") {
+            int i = rand() % 100;
+            if(i > 50)
+                return "";
+        }
+    }
+
     auto dirs = _room->directions();
     int i = rand() % dirs.size();
     Direction d = dirs[i];

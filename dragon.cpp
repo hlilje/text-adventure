@@ -34,7 +34,10 @@ std::string Dragon::action() {
 
 std::string Dragon::fight(Actor * const character) {
     int dmg = _attack_damage;
-    // TODO rain
+    if(Outdoor * env = dynamic_cast<Outdoor *>(_room)) {
+        if(env->weather() == "rainy")
+            dmg /= 2;
+    }
     return _name + " breathes fire on you for " +
            std::to_string(character->take_damage(dmg)) + " damage.";
 }

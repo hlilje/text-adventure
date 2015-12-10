@@ -35,5 +35,6 @@ std::string Goblin::action() {
 }
 
 std::string Goblin::fight(Actor * const character) {
-    return _name + " punches you for " + std::to_string(character->take_damage(_attack_damage)) + " damage.";
+    return _name + " punches you for " +
+           std::to_string(character->take_damage(_attack_damage)) + " damage.";
 }
