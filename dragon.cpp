@@ -7,6 +7,13 @@ Dragon::Dragon(Environment * const room, std::string const name)
     : Creature(1000, 100, room, "dragon", name), curr_dir(SOUTH) {}
 
 std::string Dragon::action() {
+    Human * human = nullptr;
+    for(Actor * actor : _room->monsters()) {
+        if((human = dynamic_cast<Human *>(actor))) {
+            return fight(actor);
+        }
+    }
+
     auto dirs = _room->directions();
 
     if(std::find(dirs.begin(), dirs.end(), curr_dir) != dirs.end()
@@ -26,5 +33,8 @@ std::string Dragon::action() {
 }
 
 std::string Dragon::fight(Actor * const character) {
-    return "";
+    int dmg = _attack_damage;
+    // TODO rain
+    return _name + " breathes fire on you for " +
+           std::to_string(character->take_damage(dmg)) + " damage.";
 }

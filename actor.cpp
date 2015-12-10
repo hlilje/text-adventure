@@ -29,9 +29,12 @@ void Actor::go(const Direction direction) {
     _room = new_room;
 }
 
-void Actor::take_damage(int dmg) {
-    if(_health > 0)
+int Actor::take_damage(int dmg) {
+    if(_health > 0 && !_invincible) {
         _health -= dmg;
+        return dmg;
+    }
+    return 0;
 }
 
 bool Actor::is_dead() const {

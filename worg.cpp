@@ -7,6 +7,13 @@ Worg::Worg(Environment * const room, std::string const name)
     : Creature(100, 20, room, "worg", name) {}
 
 std::string Worg::action() {
+    Human * human = nullptr;
+    for(Actor * actor : _room->monsters()) {
+        if((human = dynamic_cast<Human *>(actor))) {
+            return fight(actor);
+        }
+    }
+
     auto dirs = _room->directions();
     int i = rand() % dirs.size();
     Direction d = dirs[i];
@@ -19,5 +26,6 @@ std::string Worg::action() {
 }
 
 std::string Worg::fight(Actor * const character) {
-    return "";
+    return _name + " bites you for " +
+           std::to_string(character->take_damage(_attack_damage)) + " damage.";
 }
