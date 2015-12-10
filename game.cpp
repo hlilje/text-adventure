@@ -293,6 +293,19 @@ void print_prompt() {
 }
 
 /**
+ * Print the Game Over message.
+ */
+void print_game_over() {
+    std::cout
+        << "========================================================\n"
+        << "|                     ~ GAME OVER ~                    |\n"
+        << "|                                                      |\n"
+        << "| You died. Your adventure ends here.                  |\n"
+        << "========================================================\n"
+    << std::endl;
+}
+
+/**
  * Split the given string using the given delimiter.
  */
 std::vector<std::string> split(const std::string &s, const char delim) {
@@ -399,6 +412,7 @@ void run() {
             continue;
         }
 
+        // Class selection
         if (!started) {
             if (cmds.size() > 0 && cmds[0] == "choose") {
                 if (cmds.size() < 2) {
@@ -419,6 +433,13 @@ void run() {
             continue;
         }
 
+        // Failure state
+        if (player->is_dead()) {
+            print_game_over();
+            break;
+        }
+
+        // General gameplay
         if (cmds.size() > 0 && cmds[0] == "go") {
             if (cmds.size() < 2) {
                 std::cout << "Go where?" << std::endl;
