@@ -13,7 +13,7 @@ std::string Peasant::action() {
 
 std::string Peasant::fight(Actor * const character) {
     return "You punch the " + character->type()
-            + " " + character->name() + " for " +
-            std::to_string(character->take_damage(_attack_damage))
-            + " damage.";
+           + " " + character->name() + " for " +
+           std::to_string(character->take_damage(_attack_damage))
+           + " damage.";
 }

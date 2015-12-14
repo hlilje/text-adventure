@@ -12,5 +12,15 @@ std::string Warrior::action() {
 }
 
 std::string Warrior::fight(Actor * const character) {
-    return "";
+    Weapon * wep = nullptr;
+    if(!(wep = dynamic_cast<Weapon *>(_hand)))
+        return "You hit the " + character->type()
+               + " " + character->name() + " with your fists for " +
+               std::to_string(character->take_damage(_attack_damage))
+               + " damage.";
+    return "You hit the " + character->type()
+           + " " + character->name() + " with your "
+           + wep->type() + " for " +
+           std::to_string(character->take_damage(wep->damage()))
+           + " damage.";
 }
