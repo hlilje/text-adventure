@@ -7,8 +7,8 @@ Actor::Actor(int const health,
              Environment * const room,
              std::string const type,
              std::string const name)
-    : _health(health), _attack_damage(attack_damage), _invincible(false),
-      _room(room), _type(type), _name(name) {}
+    : _health(health), _attack_damage(attack_damage), _invincibility_timer(0),
+      _invincible(false), _room(room), _type(type), _name(name) {}
 
 std::string Actor::name() const {
     return _name;
@@ -20,6 +20,15 @@ std::string Actor::type() const {
 
 Environment * Actor::get_room() const {
     return _room;
+}
+
+void Actor::update() {
+    if (_invincibility_timer > 0) {
+        --_invincibility_timer;
+    } else {
+        _invincibility_timer = 0;
+        _invincible = false;
+    }
 }
 
 void Actor::go(const Direction direction) {

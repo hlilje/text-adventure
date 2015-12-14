@@ -11,6 +11,7 @@ namespace text_adventure {
         protected:
             int _health;
             const int _attack_damage;
+            int _invincibility_timer;
             bool _invincible;
             Environment * _room;
             std::string _type;
@@ -24,6 +25,7 @@ namespace text_adventure {
 
             std::string name() const;
             std::string type() const;
+            void update();
             int take_damage(int damage);
             bool is_dead() const;
             Environment * get_room() const;
@@ -57,13 +59,11 @@ namespace text_adventure {
              */
             virtual bool consume(const std::string & consumable);
             virtual std::string statistics() const;
-
             /**
              * Try to drop the given object.
              * Return false if the object is not carried.
              */
             bool drop(const std::string & item);
-
             /**
              * Try to pick up the given object.
              * Return false if there is no room to pick it up.
@@ -71,7 +71,6 @@ namespace text_adventure {
             bool pick_up(const std::string & item);
             std::string look();
             std::string items();
-
     };
 
     class Warrior : public Human {

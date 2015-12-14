@@ -1,0 +1,14 @@
+choose peasant
+go n
+go e
+go n
+go n
+take elixir_of_invincibility
+consume elixir_of_invincibility
+go w
+go s
+go w
+go n
+go n
+go n
+exit

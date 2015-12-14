@@ -325,7 +325,7 @@ void print_victory() {
 /**
  * Split the given string using the given delimiter.
  */
-std::vector<std::string> split(const std::string &s, const char delim) {
+std::vector<std::string> split(const std::string & s, const char delim) {
     std::vector<std::string> elems;
     std::stringstream ss(s);
     std::string item;
@@ -382,6 +382,7 @@ bool go_to(const std::string & direction) {
     } else {
         return false;
     }
+
     return true;
 }
 
@@ -396,12 +397,16 @@ void act() {
         std::string a = actor->action();
         if(a != "")
             std::cout << "*** " << a << " ***\n" << std::endl;
+
+        actor->update();
     }
 
     for (const auto & environment : environments) {
         if (Outdoor * const outdoor = dynamic_cast<Outdoor *>(environment))
             outdoor->update();
     }
+
+    player->update();
 }
 
 /**

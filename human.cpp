@@ -17,6 +17,7 @@ void Human::consume_object(Object * const object) {
     } else if (Potion * const potion = dynamic_cast<Potion *>(object)) {
         if (potion->type() == "elixir_of_invincibility") {
             _invincible = true;
+            _invincibility_timer = 5;
         } else {
             _health += potion->health();
         }
