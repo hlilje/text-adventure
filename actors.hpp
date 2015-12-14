@@ -53,12 +53,12 @@ namespace text_adventure {
              * Helper function to update stats from consumable.
              * Returns false if object not a consumable.
              */
-            bool consume_object(Object * const object);
+            virtual bool consume_object(Object * const object);
             /**
              * Try to consume the given consumable.
              * Return false if it is not in inventory.
              */
-            virtual bool consume(const std::string & consumable);
+            bool consume(const std::string & consumable);
             virtual std::string statistics() const;
             /**
              * Try to drop the given object.
@@ -93,7 +93,7 @@ namespace text_adventure {
 
             std::string action() override;
             std::string fight(Actor * const character) override;
-            bool consume(const std::string & consumable) override;
+            bool consume_object(Object * const object) override;
             std::string statistics() const override;
     };
 

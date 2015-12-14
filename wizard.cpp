@@ -31,17 +31,13 @@ std::string Wizard::statistics() const {
     return stats;
 }
 
-bool Wizard::consume(const std::string & consumable) {
-    Object * object = _back != nullptr ? _back->find(consumable) : _hand;
-
-    if (object == nullptr) return false;
-
+bool Wizard::consume_object(Object * const object) {
     if (Potion * const potion = dynamic_cast<Potion *>(object)) {
-        if (potion->type() == "mana_potion") {
+        if(potion->type() == "mana_potion") {
             _mana += potion->mana();
         }
     }
 
-    // Updates additional stats and removes from inventory
-    return Human::consume(consumable);
+    return Human::consume_object(object);
 }
+
