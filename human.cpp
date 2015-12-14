@@ -45,6 +45,16 @@ bool Human::consume(const std::string & consumable) {
 }
 
 bool Human::drop(const std::string & item) {
+    if (item == "knapsack") {
+        if (_back == nullptr)
+            return false;
+        if (_back->type() != "knapsack")
+            return false;
+        _room->drop(_back);
+        _back = nullptr;
+        return true;
+    }
+
     if (_hand != nullptr && _hand->type() == item) {
         _room->drop(_hand);
         _hand = nullptr;
