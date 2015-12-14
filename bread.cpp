@@ -3,4 +3,4 @@
 using namespace text_adventure;
 
 
-Bread::Bread() : Food("bread", 1, 1, 1) {}
+Bread::Bread() : Food("bread", 1, 1, 30) {}
