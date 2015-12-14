@@ -288,6 +288,7 @@ void print_help() {
     << "- look:      Get information about your surroundings.\n"
     << "- inventory: Get information about items you are carrying.\n"
     << "- stats:     Get information about your current stats.\n"
+    << "- wait:      Skip your turn.\n"
     << "- exit:      Exit the game.\n"
     << std::endl;
 }
@@ -534,6 +535,8 @@ void run() {
             std::cout << player->items();
         } else if (cmd == "stats") {
             std::cout << player->statistics();
+        } else if (cmd == "wait") {
+            act();
         } else if (cmd == "") {
             // Ignore
         } else {
