@@ -3,4 +3,4 @@
 using namespace text_adventure;
 
 
-ManaPotion::ManaPotion() : Potion("mana_potion", 2, 2, 0, 10) {}
+ManaPotion::ManaPotion() : Potion("mana_potion", 2, 2, 0, 50) {}

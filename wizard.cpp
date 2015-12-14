@@ -12,7 +12,17 @@ std::string Wizard::action() {
 }
 
 std::string Wizard::fight(Actor * const character) {
-    return "";
+    if(_mana >= 30) {
+        _mana -= 30;
+        return "You cast Lightning Bolt on the " + character->type()
+               + " " + character->name() + " for " +
+               std::to_string(character->take_damage(150))
+               + " damage.";
+    }
+    return "You slap the " + character->type() + " "
+           + character->name() + " with your bare hands for " +
+           std::to_string(character->take_damage(_attack_damage))
+           + " damage.";
 }
 
 std::string Wizard::statistics() const {
@@ -22,7 +32,6 @@ std::string Wizard::statistics() const {
 }
 
 bool Wizard::consume(const std::string & consumable) {
-    // TODO: More logic
     Object * object = _back != nullptr ? _back->find(consumable) : _hand;
 
     if (object == nullptr) return false;
