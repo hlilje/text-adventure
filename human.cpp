@@ -10,9 +10,10 @@ Human::Human(int const health, int const attack_damage,
     : Actor(health, attack_damage, room, type, name),
       _hand(nullptr), _back(nullptr) {}
 
-void Human::consume_object(Object * const object) {
+bool Human::consume_object(Object * const object) {
     if (Food * const food = dynamic_cast<Food *>(object)) {
         _health += food->health();
+        return true;
     // Virtual Wizard function increases mana
     } else if (Potion * const potion = dynamic_cast<Potion *>(object)) {
         if (potion->type() == "elixir_of_invincibility") {
@@ -21,7 +22,9 @@ void Human::consume_object(Object * const object) {
         } else {
             _health += potion->health();
         }
+        return true;
     }
+    return false;
 }
 
 bool Human::consume(const std::string & consumable) {
@@ -29,13 +32,14 @@ bool Human::consume(const std::string & consumable) {
 
     // On back
     if (object != nullptr) {
-        consume_object(object);
+        if(!consume_object(object))
+            return false;
         _back->remove(object);
     // Maybe in hand
-    } else if ((object = _hand)) { // Assignment
-        Consumable * const cons = dynamic_cast<Consumable *>(object);
-        if (!cons) return false;
-        consume_object(object);
+    } else if (_hand != nullptr && _hand->type() == consumable) {
+        object = _hand;
+        if(!consume_object(object))
+            return false;
         _hand = nullptr;
     } else {
         return false;

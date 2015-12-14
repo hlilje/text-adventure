@@ -51,8 +51,9 @@ namespace text_adventure {
 
             /**
              * Helper function to update stats from consumable.
+             * Returns false if object not a consumable.
              */
-            void consume_object(Object * const object);
+            bool consume_object(Object * const object);
             /**
              * Try to consume the given consumable.
              * Return false if it is not in inventory.
