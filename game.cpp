@@ -496,7 +496,20 @@ void run() {
             if (cmds.size() < 2) {
                 std::cout << "Attack what?" << std::endl;
             } else {
-                act(); // TODO
+                auto monsters = player->get_room()->monsters();
+                Actor * enemy = nullptr;
+                for(Actor * m : monsters) {
+                    if(m->name() == cmds[1]) {
+                        enemy = m;
+                        break;
+                    }
+                }
+                if(enemy == nullptr) {
+                    std::cout << "There is no enemy with that name." << std::endl;
+                } else {
+                    std::cout << player->fight(enemy) << std::endl;
+                    act();
+                }
             }
         } else if (cmds.size() > 0 && cmds[0] == "consume") {
             if (cmds.size() < 2) {
