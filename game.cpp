@@ -10,6 +10,7 @@ using namespace text_adventure;
 
 
 std::vector<Actor *> actors;
+std::vector<Actor *> demons; // Used for victory condition
 std::vector<Environment *> environments;
 std::vector<Object * > objects;
 Human * player;
@@ -237,12 +238,15 @@ void initialise() {
     // Final Castle
     act = new Demon(environments[19], "Tripp");
     actors.emplace_back(act);
+    demons.emplace_back(act);
     environments[19]->enter(act);
     act = new Demon(environments[21], "Trapp");
     actors.emplace_back(act);
+    demons.emplace_back(act);
     environments[21]->enter(act);
     act = new Demon(environments[21], "Trull");
     actors.emplace_back(act);
+    demons.emplace_back(act);
     environments[21]->enter(act);
 }
 
@@ -301,6 +305,19 @@ void print_game_over() {
         << "|                    ~ GAME OVER ~                     |\n"
         << "|                                                      |\n"
         << "| You died. Your adventure ends here.                  |\n"
+        << "========================================================\n"
+    << std::endl;
+}
+
+/**
+ * Print the Victory message.
+ */
+void print_victory() {
+    std::cout
+        << "========================================================\n"
+        << "|                     ~ VICTORY ~                      |\n"
+        << "|                                                      |\n"
+        << "| Congratulations, you won the game.                   |\n"
         << "========================================================\n"
     << std::endl;
 }
@@ -385,6 +402,19 @@ void act() {
         if (Outdoor * const outdoor = dynamic_cast<Outdoor *>(environment))
             outdoor->update();
     }
+}
+
+/**
+ * Return true if the victor condition is met, i.e. all demons in the
+ * castle have been killed.
+ */
+bool victory() {
+    for (const auto & demon : demons) {
+        if (!demon->is_dead())
+            return false;
+    }
+
+    return true;
 }
 
 /**
@@ -493,6 +523,9 @@ void run() {
         // Check for failure state
         if (player->is_dead()) {
             print_game_over();
+            break;
+        } else if (victory()) {
+            print_victory();
             break;
         }
 
