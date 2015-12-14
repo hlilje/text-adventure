@@ -42,7 +42,11 @@ namespace text_adventure {
              * Return true if successful.
              */
             bool add(Object * const object);
-            void remove(Object * const object);
+            /**
+             * Try to remove the given object.
+             * Return true if successful.
+             */
+            bool remove(Object * const object);
             /**
              * Return the item with the given type.
              * Return nullptr if no such type exists.

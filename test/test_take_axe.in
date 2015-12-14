@@ -1,0 +1,12 @@
+choose warrior
+go n
+go e
+take axe
+look
+go w
+take knapsack
+drop axe
+look
+take axe
+look
+exit

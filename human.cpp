@@ -45,33 +45,22 @@ bool Human::consume(const std::string & consumable) {
 }
 
 bool Human::drop(const std::string & item) {
-    Object * object = _back != nullptr ? _back->find(item) : _hand;
-
-    // Container on back
-    if (_back != nullptr) {
-        if (object == nullptr) {
-            if (_hand == nullptr) {
-                return false;
-            } else {
-                if (_hand->type() != item)
-                    return false;
-                else
-                    _hand = nullptr;
-            }
-        } else {
-            _back->remove(object);
-        }
-    // Nothing on back
-    } else {
-        if (_hand == nullptr) {
-            return false;
-        } else {
-            if (_hand->type() != item)
-                return false;
-            else
-                _hand = nullptr;
-        }
+    if (_hand != nullptr && _hand->type() == item) {
+        _room->drop(_hand);
+        _hand = nullptr;
+        return true;
     }
+
+    if (_back == nullptr)
+        return false;
+
+    Object * object = _back->find(item);
+
+    if (object == nullptr)
+        return false;
+
+    if (!_back->remove(object))
+            return false;
 
     _room->drop(object);
 
@@ -91,32 +80,28 @@ bool Human::pick_up(const std::string & item) {
 
     Object * const object = *it;
 
-    // Container on back
-    if (_back != nullptr) {
-        if (!_back->add(object)) {
-            if (_hand != nullptr)
-                return false;
-            else
-                _hand = object;
-        }
-    // Nothing on back
-    } else {
-        if (object->type() == "knapsack") {
-            if (_back != nullptr) {
-                return false;
-            } else {
-                Knapsack * const knapsack = dynamic_cast<Knapsack *>(object);
-                _back = knapsack;
-            }
+    if (object->type() == "knapsack") {
+        if (_back != nullptr) {
+            return false;
         } else {
-            if (_hand != nullptr)
+            Knapsack * const knapsack = dynamic_cast<Knapsack *>(object);
+            _back = knapsack;
+        }
+    } else {
+        // Prefer to put in hand
+        if (_hand == nullptr) {
+            _hand = object;
+        // Try to put on back
+        } else {
+            if (_back == nullptr)
                 return false;
-            else
-                _hand = object;
+
+            if (!_back->add(object))
+                return false;
         }
     }
 
-    _room->pick_up(*it);
+    _room->pick_up(object);
 
     return true;
 }

@@ -28,8 +28,13 @@ bool Container::add(Object * const object) {
     return true;
 }
 
-void Container::remove(Object * const object) {
+bool Container::remove(Object * const object) {
+    if (_objects.find(object) == _objects.end())
+        return false;
+
     _objects.erase(object);
+
+    return true;
 }
 
 Object * Container::find(const std::string & type) const {
