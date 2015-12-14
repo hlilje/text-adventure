@@ -181,6 +181,9 @@ void initialise() {
     obj = new Katana();
     objects.emplace_back(obj);
     environments[8]->drop(obj);
+    obj = new ManaPotion();
+    objects.emplace_back(obj);
+    environments[8]->drop(obj);
 
     // Mountain
     obj = new Bottle(4, 4);
