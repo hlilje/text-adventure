@@ -387,13 +387,6 @@ bool choose_class(const std::string & clss) {
         return false;
     }
 
-    // TODO: MOVE TO OTHER CHOOSE FUNCTION
-    cmd_single["look"] = []() -> std::string { return player->look(); };
-    cmd_single["inventory"] = []() -> std::string { return player->items(); };
-    cmd_single["inv"] = []() -> std::string { return player->items(); };
-    cmd_single["stats"] = []() -> std::string { return player->statistics(); };
-    cmd_single["wait"] = []() -> std::string { act(); return ""; };
-
     return true;
 }
 
@@ -481,6 +474,13 @@ std::string choose(std::string clss) {
 
     if (choose_class(clss)) {
         started = true;
+
+        cmd_single["look"] = []() -> std::string { return player->look(); };
+        cmd_single["inventory"] = []() -> std::string { return player->items(); };
+        cmd_single["inv"] = []() -> std::string { return player->items(); };
+        cmd_single["stats"] = []() -> std::string { return player->statistics(); };
+        cmd_single["wait"] = []() -> std::string { act(); return ""; };
+
         return player->look();
     } else {
         return "Invalid class.";
@@ -497,7 +497,7 @@ void run() {
 
     cmd_single["exit"] = quit;
     cmd_single["help"] = print_help;
-
+    cmd_double["choose"] = choose;
 
     running = true;
     print_prompt();
@@ -507,39 +507,20 @@ void run() {
         if(cmds.size() == 1) {
             if(cmd_single.count(cmd) > 0)
                 std::cout << cmd_single[cmd]() << std::endl;
+            else if(cmd_double.count(cmd) > 0)
+                std::cout << cmd_double[cmd]("") << std::endl;
             else
                 std::cout << "I don't know what '" << cmd << "' means." << std::endl;
-
-            print_prompt();
-        }
-
-        if (cmds.size() > 2) {
+        } else if(cmds.size() == 2) {
+            if(cmd_double.count(cmds[0]))
+                std::cout << cmd_double[cmds[0]](cmds[1]) << std::endl;
+            else
+                std::cout << "I don't know what '" << cmd << "' means." << std::endl;
+        } else {
             std::cout << "I only understand two words at a time." << std::endl;
-            std::cout << std::endl;
-            print_prompt();
-            continue;
         }
-
-        // Class selection
-        if (!started) {
-            if (cmds.size() > 0 && cmds[0] == "choose") {
-                if (cmds.size() < 2) {
-                    std::cout << "Who do you want to be?" << std::endl;
-                } else {
-                    if (choose_class(cmds[1])) {
-                        started = true;
-                        std::cout << std::endl << player->look();
-                    } else {
-                        std::cout << "Invalid class." << std::endl;
-                    }
-                }
-            } else {
-                std::cout << "You must choose a class before continuing." << std::endl;
-            }
-            std::cout << std::endl;
-            print_prompt();
-            continue;
-        }
+        std::cout << std::endl;
+        print_prompt();
 
         // General gameplay
         if (cmds.size() > 0 && cmds[0] == "go") {
