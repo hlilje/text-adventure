@@ -585,23 +585,27 @@ void run() {
     for (std::string cmd; running && std::getline(std::cin, cmd);) {
         std::vector<std::string> cmds = split(cmd, ' ');
 
+        std::string result;
         if(cmds.size() == 1) {
             if(cmd_single.count(cmd) > 0)
-                std::cout << cmd_single[cmd]() << std::endl;
+                result = cmd_single[cmd]();
             else if(cmd_double.count(cmd) > 0)
-                std::cout << cmd_double[cmd]("") << std::endl;
+                result = cmd_double[cmd]("");
             else
-                std::cout << "I don't know what '" << cmd << "' means." << std::endl;
+                result = "I don't know what '" + cmd + "' means.";
         } else if(cmds.size() == 2) {
             if(cmd_double.count(cmds[0]))
-                std::cout << cmd_double[cmds[0]](cmds[1]) << std::endl;
+                result = cmd_double[cmds[0]](cmds[1]);
             else
-                std::cout << "I don't know what '" << cmd << "' means." << std::endl;
+                result = "I don't know what '" + cmd + "' means.";
         } else if (cmds.size() == 0) {
             // Skip
         } else {
-            std::cout << "I only understand two words at a time." << std::endl;
+            result = "I only understand two words at a time.";
         }
+
+        if(result != "")
+            std::cout << result << std::endl;
         std::cout << std::endl;
         print_prompt();
 
