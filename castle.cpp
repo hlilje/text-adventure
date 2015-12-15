@@ -4,7 +4,7 @@
 using namespace text_adventure;
 
 
-Castle::Castle() : Indoor() {
+Castle::Castle(const bool locked) : Indoor(locked) {
 
 }
 

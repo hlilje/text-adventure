@@ -31,11 +31,20 @@ void Actor::update() {
     }
 }
 
-void Actor::go(const Direction direction) {
-    Environment * new_room = _room->neighbour(direction);
+bool Actor::go(const Direction direction) {
+    Environment * const new_room = _room->neighbour(direction);
+    Indoor * const indoor        = dynamic_cast<Indoor *>(new_room);
+
+    if (indoor) {
+        if (indoor->is_locked() && !has_item("key"))
+            return false;
+    }
+
     _room->exit(this);
     new_room->enter(this);
     _room = new_room;
+
+    return true;
 }
 
 int Actor::take_damage(int dmg) {
@@ -48,4 +57,8 @@ int Actor::take_damage(int dmg) {
 
 bool Actor::is_dead() const {
     return _health <= 0;
+}
+
+bool Actor::has_item(std::string const & item) const {
+    return false;
 }

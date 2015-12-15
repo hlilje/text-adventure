@@ -187,3 +187,26 @@ std::string Human::statistics() const {
     return stats;
 }
 
+bool Human::has_item(std::string const & item) const {
+    if (_hand == nullptr && _back == nullptr)
+        return false;
+
+    if (_hand != nullptr && _back == nullptr) {
+        if (_hand->type() != item)
+            return false;
+    }
+
+    if (_hand == nullptr && _back != nullptr) {
+        if (!_back->find(item))
+            return false;
+    }
+
+    if (_hand != nullptr && _back != nullptr) {
+        if (_hand->type() != item) {
+            if (!_back->find(item))
+                return false;
+        }
+    }
+
+    return true;
+}

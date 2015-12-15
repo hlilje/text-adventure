@@ -3,7 +3,10 @@
 using namespace text_adventure;
 
 
-Indoor::Indoor() : Environment() {
+Indoor::Indoor(const bool locked) : Environment(), _locked(locked) {
 
 }
 
+bool Indoor::is_locked() {
+    return _locked;
+}

@@ -30,7 +30,12 @@ namespace text_adventure {
             bool is_dead() const;
             Environment * get_room() const;
 
-            virtual void go(const Direction direction);
+            /**
+             * Try to go to the given direction, return false if it
+             * is not possible.
+             */
+            bool go(const Direction direction);
+            virtual bool has_item(std::string const & item) const;
             /**
              * Make the actor act.
              */
@@ -72,6 +77,8 @@ namespace text_adventure {
             bool pick_up(const std::string & item);
             std::string look();
             std::string items();
+
+            bool has_item(std::string const & item) const override;
     };
 
     class Warrior : public Human {

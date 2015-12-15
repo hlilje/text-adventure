@@ -80,22 +80,27 @@ namespace text_adventure {
     };
 
     class Indoor : public Environment {
+        private:
+            bool _locked;
+
         public:
-            Indoor();
+            Indoor(const bool locked);
             ~Indoor() override = default;
+
+            bool is_locked();
     };
 
 
     class Cave : public Indoor {
         public:
-            Cave();
+            Cave(const bool locked);
             ~Cave() override = default;
 
             virtual std::string type() override;
     };
     class Castle : public Indoor {
         public:
-            Castle();
+            Castle(const bool locked);
             ~Castle() override = default;
 
             virtual std::string type() override;
@@ -103,7 +108,7 @@ namespace text_adventure {
 
     class Hut : public Indoor {
         public:
-            Hut();
+            Hut(const bool locked);
             ~Hut() override = default;
 
             virtual std::string type() override;

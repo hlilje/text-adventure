@@ -4,7 +4,7 @@
 using namespace text_adventure;
 
 
-Hut::Hut() : Indoor() {
+Hut::Hut(const bool locked) : Indoor(locked) {
 
 }
 

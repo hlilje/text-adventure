@@ -4,7 +4,7 @@
 using namespace text_adventure;
 
 
-Cave::Cave() : Indoor() {
+Cave::Cave(const bool locked) : Indoor(locked) {
 
 }
 

@@ -39,22 +39,22 @@ void initialise() {
     environments[2]->add_neighbour(WEST, environments[1]);
 
     // Caves
-    env = new Cave();
+    env = new Cave(false);
     environments.emplace_back(env);
     environments[2]->add_neighbour(NORTH, environments[3]);
     environments[3]->add_neighbour(SOUTH, environments[2]);
 
-    env = new Cave();
+    env = new Cave(false);
     environments.emplace_back(env);
     environments[3]->add_neighbour(NORTH, environments[4]);
     environments[4]->add_neighbour(SOUTH, environments[3]);
 
-    env = new Cave();
+    env = new Cave(false);
     environments.emplace_back(env);
     environments[3]->add_neighbour(WEST, environments[5]);
     environments[5]->add_neighbour(EAST, environments[3]);
 
-    env = new Cave();
+    env = new Cave(false);
     environments.emplace_back(env);
     environments[4]->add_neighbour(WEST, environments[6]);
     environments[6]->add_neighbour(EAST, environments[4]);
@@ -67,7 +67,7 @@ void initialise() {
     environments[5]->add_neighbour(WEST, environments[7]);
     environments[7]->add_neighbour(EAST, environments[5]);
 
-    env = new Hut();
+    env = new Hut(false);
     environments.emplace_back(env);
     environments[7]->add_neighbour(WEST, environments[8]);
     environments[8]->add_neighbour(EAST, environments[7]);
@@ -123,13 +123,13 @@ void initialise() {
     environments[17]->add_neighbour(SOUTH, environments[15]);
 
     // Final Castle
-    env = new Castle();
+    env = new Castle(false);
     environments.emplace_back(env);
-    env = new Castle();
+    env = new Castle(false);
     environments.emplace_back(env);
-    env = new Castle();
+    env = new Castle(true); // Locked
     environments.emplace_back(env);
-    env = new Castle();
+    env = new Castle(false);
     environments.emplace_back(env);
 
     environments[17]->add_neighbour(NORTH, environments[18]);
@@ -368,22 +368,43 @@ bool go_to(const std::string & direction) {
     Environment * room = player->get_room();
 
     if (direction == "n" || direction == "north") {
-        if (!room->neighbour(NORTH))
+        if (!room->neighbour(NORTH)) {
+            std::cout << "There is no exit in that direction." << std::endl;
             return false;
-        player->go(NORTH);
+        }
+        if (!player->go(NORTH)) {
+            std::cout << "The room is locked." << std::endl;
+            return false;
+        }
     } else if (direction == "e" || direction == "east") {
-        if (!room->neighbour(EAST))
+        if (!room->neighbour(EAST)) {
+            std::cout << "There is no exit in that direction." << std::endl;
             return false;
-        player->go(EAST);
+        }
+        if (!player->go(EAST)) {
+            std::cout << "The room is locked." << std::endl;
+            return false;
+        }
     } else if (direction == "s" || direction == "south") {
-        if (!room->neighbour(SOUTH))
+        if (!room->neighbour(SOUTH)) {
+            std::cout << "There is no exit in that direction." << std::endl;
             return false;
-        player->go(SOUTH);
+        }
+        if (!player->go(SOUTH)) {
+            std::cout << "The room is locked." << std::endl;
+            return false;
+        }
     } else if (direction == "w" || direction == "west") {
-        if (!room->neighbour(WEST))
+        if (!room->neighbour(WEST)) {
+            std::cout << "There is no exit in that direction." << std::endl;
             return false;
-        player->go(WEST);
+        }
+        if (!player->go(WEST)) {
+            std::cout << "The room is locked." << std::endl;
+            return false;
+        }
     } else {
+        std::cout << "Invalid direction." << std::endl;
         return false;
     }
 
@@ -480,9 +501,7 @@ void run() {
             if (cmds.size() < 2) {
                 std::cout << "Go where?" << std::endl;
             } else {
-                if (!go_to(cmds[1]))
-                    std::cout << "Invalid direction." << std::endl;
-                else {
+                if (go_to(cmds[1])) {
                     act();
                     std::cout << player->look();
                 }
