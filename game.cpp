@@ -446,7 +446,7 @@ bool go_to(const std::string & direction) {
  */
 std::string go(std::string const & dir) {
     if(dir == "")
-        return "Go where?";
+        return "Go where?\n";
 
     if(go_to(dir)) {
         act();
@@ -461,10 +461,10 @@ std::string go(std::string const & dir) {
  */
 std::string consume(std::string cons) {
     if(cons == "")
-        return  "Consume what?";
+        return  "Consume what?\n";
 
     if (!player->consume(cons))
-        return "You can not consume that.";
+        return "You can not consume that.\n";
 
     return "";
 }
@@ -474,7 +474,7 @@ std::string consume(std::string cons) {
  */
 std::string attack(std::string name) {
     if(name == "")
-        return "Attack what?";
+        return "Attack what?\n";
 
     auto monsters = player->get_room()->monsters();
     Actor * enemy = nullptr;
@@ -485,7 +485,7 @@ std::string attack(std::string name) {
         }
     }
     if(enemy == nullptr) {
-        return "There is no enemy with that name.";
+        return "There is no enemy with that name.\n";
     } else {
         std::cout << player->fight(enemy) << std::endl;
         act();
@@ -519,9 +519,9 @@ std::string quit() {
  */
 std::string take(const std::string & item) {
     if (item == "")
-        std::cout << "Take what?" << std::endl;
+        return "Take what?\n";
     else if (!player->pick_up(item))
-        std::cout << "You can not take that." << std::endl;
+        return "You can not take that.\n";
 
     return "";
 }
@@ -531,9 +531,9 @@ std::string take(const std::string & item) {
  */
 std::string drop(const std::string & item) {
     if (item == "")
-        std::cout << "Drop what?" << std::endl;
+        return "Drop what?\n";
     else if (!player->drop(item))
-        std::cout << "You do not carry that." << std::endl;
+        return "You do not carry that.\n";
 
     return "";
 }
@@ -543,10 +543,10 @@ std::string drop(const std::string & item) {
  */
 std::string choose(std::string const & clss) {
     if (started)
-        return "You may not change your class.";
+        return "You may not change your class.\n";
 
     if (clss == "")
-        return "Who do you want to be?";
+        return "Who do you want to be?\n";
 
     if (choose_class(clss)) {
         started = true;
@@ -564,7 +564,7 @@ std::string choose(std::string const & clss) {
 
         return player->look();
     } else {
-        return "Invalid class.";
+        return "Invalid class.\n";
     }
 }
 
@@ -592,21 +592,20 @@ void run() {
             else if(cmd_double.count(cmd) > 0)
                 result = cmd_double[cmd]("");
             else
-                result = "I don't know what '" + cmd + "' means.";
+                result = "I don't know what '" + cmd + "' means.\n";
         } else if(cmds.size() == 2) {
             if(cmd_double.count(cmds[0]))
                 result = cmd_double[cmds[0]](cmds[1]);
             else
-                result = "I don't know what '" + cmd + "' means.";
+                result = "I don't know what '" + cmd + "' means.\n";
         } else if (cmds.size() == 0) {
             // Skip
         } else {
-            result = "I only understand two words at a time.";
+            result = "I only understand two words at a time.\n";
         }
 
-        if(result != "")
-            std::cout << result << std::endl;
-        std::cout << std::endl;
+        std::cout << result << std::endl;
+
         print_prompt();
 
         if (!started) continue;
