@@ -120,12 +120,13 @@ bool Human::pick_up(const std::string & item) {
     return true;
 }
 
-std::string Human::look() {
+std::string Human::look() const {
     std::string sight = _room->description() + "\n";
 
     const auto monsters = _room->monsters();
 
-    if(monsters.empty() || (monsters.size() == 1 && monsters.count(this) > 0))
+    if(monsters.empty() || (monsters.size() == 1 &&
+       monsters.count(const_cast<Human *>(this)) > 0))
         sight += "There is noone else here.\n";
     else {
         sight += "There are the following monsters here:\n";

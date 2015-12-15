@@ -71,7 +71,7 @@ namespace text_adventure {
              * Return false if there is no room to pick it up.
              */
             bool pick_up(const std::string & item);
-            std::string look(); // TODO: Should be const but map does not allow it
+            std::string look() const;
             std::string items() const;
 
             /**
