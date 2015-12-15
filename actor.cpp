@@ -5,8 +5,8 @@ using namespace text_adventure;
 Actor::Actor(int const health,
              int const attack_damage,
              Environment * const room,
-             std::string const type,
-             std::string const name)
+             std::string const & type,
+             std::string const & name)
     : _health(health), _attack_damage(attack_damage), _invincibility_timer(0),
       _invincible(false), _room(room), _type(type), _name(name) {}
 
@@ -47,7 +47,7 @@ bool Actor::go(const Direction direction) {
     return true;
 }
 
-int Actor::take_damage(int dmg) {
+int Actor::take_damage(int const dmg) {
     if(_health > 0 && !_invincible) {
         _health -= dmg;
         return dmg;

@@ -5,8 +5,8 @@ using namespace text_adventure;
 
 Human::Human(int const health, int const attack_damage,
              Environment * const room,
-             std::string const type,
-             std::string const name)
+             std::string const & type,
+             std::string const & name)
     : Actor(health, attack_damage, room, type, name),
       _hand(nullptr), _back(nullptr) {}
 
@@ -123,7 +123,7 @@ bool Human::pick_up(const std::string & item) {
 std::string Human::look() {
     std::string sight = _room->description() + "\n";
 
-    auto monsters = _room->monsters();
+    const auto monsters = _room->monsters();
 
     if(monsters.empty() || (monsters.size() == 1 && monsters.count(this) > 0))
         sight += "There is noone else here.\n";
@@ -141,7 +141,7 @@ std::string Human::look() {
     return sight;
 }
 
-std::string Human::items() {
+std::string Human::items() const {
     if(_hand == nullptr && _back == nullptr)
         return "You aren't carrying any items.\n";
 

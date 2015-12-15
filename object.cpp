@@ -2,7 +2,7 @@
 
 using namespace text_adventure;
 
-Object::Object(std::string const type, int const vol,
+Object::Object(std::string const & type, int const vol,
                int const weight, bool const liquid)
     : _type(type), _volume(vol), _weight(weight), _is_liquid(liquid) {}
 

@@ -8,6 +8,6 @@ Forest::Forest() : Outdoor() {
 
 }
 
-std::string Forest::type() {
+std::string Forest::type() const {
     return "forest";
 }

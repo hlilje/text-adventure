@@ -3,7 +3,7 @@
 using namespace text_adventure;
 
 
-Zombie::Zombie(Environment * const room, std::string const name)
+Zombie::Zombie(Environment * const room, std::string const & name)
     : Humanoid(50, 10, room, "zombie", name) {}
 
 std::string Zombie::action() {

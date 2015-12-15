@@ -3,7 +3,7 @@
 using namespace text_adventure;
 
 
-Worg::Worg(Environment * const room, std::string const name)
+Worg::Worg(Environment * const room, std::string const & name)
     : Creature(100, 20, room, "worg", name) {}
 
 std::string Worg::action() {

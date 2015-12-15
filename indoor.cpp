@@ -7,6 +7,6 @@ Indoor::Indoor(const bool locked) : Environment(), _locked(locked) {
 
 }
 
-bool Indoor::is_locked() {
+bool Indoor::is_locked() const {
     return _locked;
 }

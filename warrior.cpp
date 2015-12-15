@@ -4,7 +4,7 @@ using namespace text_adventure;
 
 
 Warrior::Warrior(Environment * const room,
-                 std::string const name)
+                 std::string const & name)
     : Human(300, 10, room, "warrior", name) {}
 
 std::string Warrior::action() {

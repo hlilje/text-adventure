@@ -4,7 +4,7 @@ using namespace text_adventure;
 
 
 Wizard::Wizard(Environment * const room,
-               std::string const name)
+               std::string const & name)
     : Human(150, 5, room, "wizard", name), _mana(100) {}
 
 std::string Wizard::action() {

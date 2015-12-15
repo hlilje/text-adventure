@@ -3,7 +3,7 @@
 using namespace text_adventure;
 
 
-Container::Container(std::string const type, int const vol,
+Container::Container(std::string const & type, int const vol,
                      int const weight, bool const liquid,
                      const int max_volume, const int max_weight,
                      const bool holds_liquid) :

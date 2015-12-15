@@ -8,6 +8,6 @@ Desert::Desert() : Outdoor() {
 
 }
 
-std::string Desert::type() {
+std::string Desert::type() const {
     return "desert";
 }

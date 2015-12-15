@@ -5,10 +5,10 @@ using namespace text_adventure;
 
 Environment::Environment() : _neighbours(std::vector<Environment *>(4)) {}
 
-std::string Environment::description() {
+std::string Environment::description() const {
     std::string desc = "You are in a " + type() + ".\n\n";
 
-    if (Outdoor * const outdoor = dynamic_cast<Outdoor *>(this))
+    if (const Outdoor * const outdoor = dynamic_cast<const Outdoor *>(this))
         desc += "The weather is " + outdoor->weather() + ".\n\n";
 
     if(_objects.empty())
@@ -37,7 +37,7 @@ std::string Environment::description() {
     return desc;
 }
 
-std::unordered_set<Actor *> const & Environment::monsters() {
+std::unordered_set<Actor *> const & Environment::monsters() const {
     return _actors;
 }
 
@@ -45,7 +45,7 @@ std::unordered_set<Object *> const & Environment::objects() const {
     return _objects;
 }
 
-std::vector<Direction> Environment::directions() {
+std::vector<Direction> Environment::directions() const {
     std::vector<Direction> dirs;
     for(size_t i = 0; i < _neighbours.size(); ++i)
         if(_neighbours[i] != nullptr)
@@ -53,7 +53,7 @@ std::vector<Direction> Environment::directions() {
     return dirs;
 }
 
-Environment * Environment::neighbour(const Direction dir) {
+Environment * Environment::neighbour(const Direction dir) const {
     return _neighbours[dir];
 }
 

@@ -26,18 +26,18 @@ namespace text_adventure {
              * Return a description string of location, items, directions and
              * monsters.
              */
-            std::string description();
-            std::unordered_set<Actor *> const & monsters();
-            void add_neighbour(Direction dir, Environment * const room);
+            std::string description() const;
+            std::unordered_set<Actor *> const & monsters() const;
             std::unordered_set<Object *> const & objects() const;
-            std::vector<Direction> directions();
-            Environment * neighbour(const Direction dir);
+            std::vector<Direction> directions() const;
+            Environment * neighbour(const Direction dir) const;
+            void add_neighbour(Direction dir, Environment * const room);
             void enter(Actor * const character);
             void exit(Actor * const character);
             void pick_up(Object * const object);
             void drop(Object * const object);
 
-            virtual std::string type() = 0;
+            virtual std::string type() const = 0;
     };
 
     class Outdoor : public Environment {
@@ -48,7 +48,7 @@ namespace text_adventure {
             Outdoor();
             ~Outdoor() override = default;
 
-            std::string weather();
+            std::string weather() const;
             /**
              * Update the environment, such as its weather.
              */
@@ -60,7 +60,7 @@ namespace text_adventure {
             Forest();
             ~Forest() override = default;
 
-            virtual std::string type() override;
+            std::string type() const override;
     };
 
     class Desert : public Outdoor {
@@ -68,7 +68,7 @@ namespace text_adventure {
             Desert();
             ~Desert() override = default;
 
-            virtual std::string type() override;
+            std::string type() const override;
     };
 
     class Mountain : public Outdoor {
@@ -76,7 +76,7 @@ namespace text_adventure {
             Mountain();
             ~Mountain() override = default;
 
-            virtual std::string type() override;
+            std::string type() const override;
     };
 
     class Indoor : public Environment {
@@ -87,7 +87,7 @@ namespace text_adventure {
             Indoor(const bool locked);
             ~Indoor() override = default;
 
-            bool is_locked();
+            bool is_locked() const;
     };
 
 
@@ -96,14 +96,14 @@ namespace text_adventure {
             Cave(const bool locked);
             ~Cave() override = default;
 
-            virtual std::string type() override;
+            std::string type() const override;
     };
     class Castle : public Indoor {
         public:
             Castle(const bool locked);
             ~Castle() override = default;
 
-            virtual std::string type() override;
+            std::string type() const override;
     };
 
     class Hut : public Indoor {
@@ -111,6 +111,6 @@ namespace text_adventure {
             Hut(const bool locked);
             ~Hut() override = default;
 
-            virtual std::string type() override;
+            std::string type() const override;
     };
 }

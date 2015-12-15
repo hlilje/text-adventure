@@ -8,6 +8,6 @@ Cave::Cave(const bool locked) : Indoor(locked) {
 
 }
 
-std::string Cave::type() {
+std::string Cave::type() const {
     return "cave";
 }

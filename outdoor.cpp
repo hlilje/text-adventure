@@ -5,7 +5,7 @@ using namespace text_adventure;
 
 Outdoor::Outdoor() : Environment(), _weather(SUNNY) {}
 
-std::string Outdoor::weather() {
+std::string Outdoor::weather() const {
     switch (_weather) {
         case SUNNY:
             return "sunny";

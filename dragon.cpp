@@ -3,7 +3,7 @@
 using namespace text_adventure;
 
 
-Dragon::Dragon(Environment * const room, std::string const name)
+Dragon::Dragon(Environment * const room, std::string const & name)
     : Creature(1000, 100, room, "dragon", name), curr_dir(SOUTH) {}
 
 std::string Dragon::action() {

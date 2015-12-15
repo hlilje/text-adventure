@@ -8,6 +8,6 @@ Castle::Castle(const bool locked) : Indoor(locked) {
 
 }
 
-std::string Castle::type() {
+std::string Castle::type() const {
     return "castle";
 }

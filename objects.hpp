@@ -1,7 +1,6 @@
 #pragma once
 
 #include <algorithm>
-#include <iostream>
 #include <string>
 #include <unordered_set>
 
@@ -14,7 +13,7 @@ namespace text_adventure {
             const bool _is_liquid;
 
         public:
-            Object(std::string const type, int const vol, int const weight,
+            Object(std::string const & type, int const vol, int const weight,
                    bool const liquid);
             virtual ~Object() = default;
 
@@ -32,7 +31,7 @@ namespace text_adventure {
 
             std::unordered_set<Object *> _objects;
         public:
-            Container(std::string const type, int const vol, int const weight,
+            Container(std::string const & type, int const vol, int const weight,
                       bool const liquid, const int max_volume,
                       const int max_weight, const bool holds_liquid);
             ~Container() override = default;
@@ -59,7 +58,7 @@ namespace text_adventure {
 
     class Consumable : public Object {
         public:
-            Consumable(std::string const type, int const vol, int const weight,
+            Consumable(std::string const & type, int const vol, int const weight,
                        bool const liquid);
             ~Consumable() override = default;
     };
@@ -69,7 +68,7 @@ namespace text_adventure {
             const int _damage;
 
         public:
-            Weapon(std::string const type, int const vol, int const weight,
+            Weapon(std::string const & type, int const vol, int const weight,
                    int const damage);
             ~Weapon() override = default;
 
@@ -99,7 +98,7 @@ namespace text_adventure {
             const int _health;
 
         public:
-            Food(std::string const type, int const vol, int const weight,
+            Food(std::string const & type, int const vol, int const weight,
                  int const health);
             ~Food() override = default;
 
@@ -124,7 +123,7 @@ namespace text_adventure {
             const int _mana;
 
         public:
-            Potion(std::string const type, int const vol, int const weight,
+            Potion(std::string const & type, int const vol, int const weight,
                    int const health, int const mana);
             ~Potion() override = default;
 
@@ -158,7 +157,7 @@ namespace text_adventure {
 
     class Sword : public Weapon {
         public:
-            Sword(std::string const type, int const vol,
+            Sword(std::string const & type, int const vol,
                   int const weight, int const damage);
             ~Sword() override = default;
     };

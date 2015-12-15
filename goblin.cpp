@@ -3,7 +3,7 @@
 using namespace text_adventure;
 
 
-Goblin::Goblin(Environment * const room, std::string const name)
+Goblin::Goblin(Environment * const room, std::string const & name)
     : Humanoid(100, 20, room, "goblin", name) {}
 
 std::string Goblin::action() {

@@ -8,6 +8,6 @@ Mountain::Mountain() : Outdoor() {
 
 }
 
-std::string Mountain::type() {
+std::string Mountain::type() const {
     return "mountain";
 }

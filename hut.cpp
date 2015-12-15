@@ -8,6 +8,6 @@ Hut::Hut(const bool locked) : Indoor(locked) {
 
 }
 
-std::string Hut::type() {
+std::string Hut::type() const {
     return "hut";
 }
