@@ -147,10 +147,7 @@ void initialise() {
      */
 
     // Forest
-    Object * obj = new Key();
-    objects.emplace_back(obj);
-    environments[1]->drop(obj);
-    obj = new Knapsack(10, 10);
+    Object * obj = new Knapsack(10, 10);
     objects.emplace_back(obj);
     environments[1]->drop(obj);
     obj = new Axe();
@@ -189,6 +186,9 @@ void initialise() {
     obj = new Bottle(4, 4);
     objects.emplace_back(obj);
     environments[9]->drop(obj);
+    obj = new Key();
+    objects.emplace_back(obj);
+    environments[10]->drop(obj);
     obj = new Longsword();
     objects.emplace_back(obj);
     environments[11]->drop(obj);
