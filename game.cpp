@@ -478,6 +478,18 @@ std::string quit() {
 }
 
 /**
+ * Try to take the given item.
+ */
+std::string take(const std::string & item) {
+    if (item == "")
+        std::cout << "Take what?" << std::endl;
+    else if (!player->pick_up(item))
+        std::cout << "You can not take that." << std::endl;
+
+    return "";
+}
+
+/**
  * Choose class
  */
 std::string choose(std::string const & clss) {
@@ -496,6 +508,7 @@ std::string choose(std::string const & clss) {
         cmd_single["stats"] = []() -> std::string { return player->statistics(); };
         cmd_single["wait"] = []() -> std::string { act(); return ""; };
         cmd_double["go"] = go;
+        cmd_double["take"] = take;
 
         return player->look();
     } else {
@@ -538,15 +551,10 @@ void run() {
         std::cout << std::endl;
         print_prompt();
 
+        continue; // TODO
+
         // General gameplay
-        if (cmds.size() > 0 && cmds[0] == "take") {
-            if (cmds.size() < 2) {
-                std::cout << "Take what?" << std::endl;
-            } else {
-                if (!player->pick_up(cmds[1]))
-                    std::cout << "You can not take that." << std::endl;
-            }
-        } else if (cmds.size() > 0 && cmds[0] == "drop") {
+        if (cmds.size() > 0 && cmds[0] == "drop") {
             if (cmds.size() < 2) {
                 std::cout << "Drop what?" << std::endl;
             } else {
