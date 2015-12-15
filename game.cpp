@@ -20,6 +20,7 @@ bool running = false;
 bool started = false;
 std::unordered_map<std::string, std::function<std::string()>> cmd_single;
 std::unordered_map<std::string, std::function<std::string(std::string)>> cmd_double;
+std::unordered_map<std::string, std::function<std::string(Human const &)>> cmd_player;
 
 /**
  * Initialise the playable game.
@@ -487,7 +488,7 @@ std::string attack(std::string name) {
     if(enemy == nullptr) {
         return "There is no enemy with that name.\n";
     } else {
-        std::cout << player->fight(enemy) << std::endl;
+        std::cout << player->fight(enemy) << std::endl << std::endl;
         act();
     }
     return "";
@@ -551,10 +552,10 @@ std::string choose(std::string const & clss) {
     if (choose_class(clss)) {
         started = true;
 
-        cmd_single["look"] = []() -> std::string { return player->look(); };
-        cmd_single["inventory"] = []() -> std::string { return player->items(); };
-        cmd_single["inv"] = []() -> std::string { return player->items(); };
-        cmd_single["stats"] = []() -> std::string { return player->statistics(); };
+        cmd_player["look"] = &Human::look;
+        cmd_player["inventory"] = &Human::items;
+        cmd_player["inv"] = &Human::items;
+        cmd_player["stats"] = &Human::statistics;
         cmd_single["wait"] = []() -> std::string { act(); return ""; };
         cmd_double["consume"] = consume;
         cmd_double["attack"] = attack;
@@ -589,6 +590,8 @@ void run() {
         if(cmds.size() == 1) {
             if(cmd_single.count(cmd) > 0)
                 result = cmd_single[cmd]();
+            else if(cmd_player.count(cmd) > 0)
+                result = cmd_player[cmd](*player);
             else if(cmd_double.count(cmd) > 0)
                 result = cmd_double[cmd]("");
             else
