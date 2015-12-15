@@ -597,6 +597,8 @@ void run() {
                 std::cout << cmd_double[cmds[0]](cmds[1]) << std::endl;
             else
                 std::cout << "I don't know what '" << cmd << "' means." << std::endl;
+        } else if (cmds.size() == 0) {
+            // Skip
         } else {
             std::cout << "I only understand two words at a time." << std::endl;
         }
@@ -613,8 +615,6 @@ void run() {
             print_victory();
             break;
         }
-
-        print_prompt();
     }
 }
 
