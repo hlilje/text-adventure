@@ -527,6 +527,18 @@ std::string take(const std::string & item) {
 }
 
 /**
+ * Try to drop the given item.
+ */
+std::string drop(const std::string & item) {
+    if (item == "")
+        std::cout << "Drop what?" << std::endl;
+    else if (!player->drop(item))
+        std::cout << "You do not carry that." << std::endl;
+
+    return "";
+}
+
+/**
  * Choose class.
  */
 std::string choose(std::string const & clss) {
@@ -548,6 +560,7 @@ std::string choose(std::string const & clss) {
         cmd_double["attack"] = attack;
         cmd_double["go"] = go;
         cmd_double["take"] = take;
+        cmd_double["drop"] = drop;
 
         return player->look();
     } else {
@@ -593,12 +606,24 @@ void run() {
         continue; // TODO
 
         // General gameplay
-        if (cmds.size() > 0 && cmds[0] == "drop") {
+        if (cmds.size() > 0 && cmds[0] == "attack") {
             if (cmds.size() < 2) {
-                std::cout << "Drop what?" << std::endl;
+                std::cout << "Attack what?" << std::endl;
             } else {
-                if (!player->drop(cmds[1]))
-                    std::cout << "You do not carry that." << std::endl;
+                auto monsters = player->get_room()->monsters();
+                Actor * enemy = nullptr;
+                for(Actor * m : monsters) {
+                    if(m->name() == cmds[1]) {
+                        enemy = m;
+                        break;
+                    }
+                }
+                if(enemy == nullptr) {
+                    std::cout << "There is no enemy with that name." << std::endl;
+                } else {
+                    std::cout << player->fight(enemy) << std::endl;
+                    act();
+                }
             }
         } else if (cmd == "") {
             // Ignore
