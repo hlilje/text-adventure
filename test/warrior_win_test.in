@@ -1,0 +1,47 @@
+choose warrior
+stats
+inventory
+go n
+take knapsack
+go e
+go n
+go w
+go w
+go w
+take katana
+take bread
+go e
+go n
+go n
+take key
+go n
+inventory
+drop katana
+take longsword
+inventory
+go e
+go e
+go n
+inventory
+stats
+consume bread
+drop longsword
+take pancakes
+inventory
+stats
+consume pancakes
+take longsword
+stats
+look
+go n
+attack Tripp
+attack Tripp
+go w
+drop katana
+take shotgun
+go e
+go n
+attack Trapp
+attack Trapp
+attack Trull
+attack Trull

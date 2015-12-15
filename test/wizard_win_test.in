@@ -1,0 +1,40 @@
+choose wizard
+stats
+inventory
+go n
+take knapsack
+go e
+go n
+go w
+go w
+go w
+take bread
+take mana_potion
+go e
+go e
+go n
+go n
+go e
+go n
+take mana_potion
+go n
+go n
+inventory
+stats
+consume mana_potion
+consume bread
+consume mana_potion
+take pancakes
+inventory
+stats
+consume pancakes
+stats
+look
+go n
+attack Tripp
+attack Tripp
+go n
+attack Trapp
+attack Trapp
+attack Trull
+attack Trull
