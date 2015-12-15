@@ -442,6 +442,21 @@ bool go_to(const std::string & direction) {
 }
 
 /**
+ *
+ */
+std::string go(std::string const & dir) {
+    if(dir == "")
+        return "Go where?";
+
+    if(go_to(dir)) {
+        act();
+        std::cout << player->look();
+    }
+
+    return "";
+}
+
+/**
  * Return true if the victor condition is met, i.e. all demons in the
  * castle have been killed.
  */
@@ -465,7 +480,7 @@ std::string quit() {
 /**
  * Choose class
  */
-std::string choose(std::string clss) {
+std::string choose(std::string const & clss) {
     if (started)
         return "You may not change your class.";
 
@@ -480,6 +495,7 @@ std::string choose(std::string clss) {
         cmd_single["inv"] = []() -> std::string { return player->items(); };
         cmd_single["stats"] = []() -> std::string { return player->statistics(); };
         cmd_single["wait"] = []() -> std::string { act(); return ""; };
+        cmd_double["go"] = go;
 
         return player->look();
     } else {
@@ -523,16 +539,7 @@ void run() {
         print_prompt();
 
         // General gameplay
-        if (cmds.size() > 0 && cmds[0] == "go") {
-            if (cmds.size() < 2) {
-                std::cout << "Go where?" << std::endl;
-            } else {
-                if (go_to(cmds[1])) {
-                    act();
-                    std::cout << player->look();
-                }
-            }
-        } else if (cmds.size() > 0 && cmds[0] == "take") {
+        if (cmds.size() > 0 && cmds[0] == "take") {
             if (cmds.size() < 2) {
                 std::cout << "Take what?" << std::endl;
             } else {
