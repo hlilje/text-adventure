@@ -442,7 +442,7 @@ bool go_to(const std::string & direction) {
 }
 
 /**
- *
+ * Go command.
  */
 std::string go(std::string const & dir) {
     if(dir == "")
@@ -453,6 +453,43 @@ std::string go(std::string const & dir) {
         std::cout << player->look();
     }
 
+    return "";
+}
+
+/**
+ * Consume command.
+ */
+std::string consume(std::string cons) {
+    if(cons == "")
+        return  "Consume what?";
+
+    if (!player->consume(cons))
+        return "You can not consume that.";
+
+    return "";
+}
+
+/**
+ * Attack command.
+ */
+std::string attack(std::string name) {
+    if(name == "")
+        return "Attack what?";
+
+    auto monsters = player->get_room()->monsters();
+    Actor * enemy = nullptr;
+    for(Actor * m : monsters) {
+        if(m->name() == name) {
+            enemy = m;
+            break;
+        }
+    }
+    if(enemy == nullptr) {
+        return "There is no enemy with that name.";
+    } else {
+        std::cout << player->fight(enemy) << std::endl;
+        act();
+    }
     return "";
 }
 
@@ -490,7 +527,7 @@ std::string take(const std::string & item) {
 }
 
 /**
- * Choose class
+ * Choose class.
  */
 std::string choose(std::string const & clss) {
     if (started)
@@ -507,6 +544,8 @@ std::string choose(std::string const & clss) {
         cmd_single["inv"] = []() -> std::string { return player->items(); };
         cmd_single["stats"] = []() -> std::string { return player->statistics(); };
         cmd_single["wait"] = []() -> std::string { act(); return ""; };
+        cmd_double["consume"] = consume;
+        cmd_double["attack"] = attack;
         cmd_double["go"] = go;
         cmd_double["take"] = take;
 
@@ -561,34 +600,6 @@ void run() {
                 if (!player->drop(cmds[1]))
                     std::cout << "You do not carry that." << std::endl;
             }
-        } else if (cmds.size() > 0 && cmds[0] == "attack") {
-            if (cmds.size() < 2) {
-                std::cout << "Attack what?" << std::endl;
-            } else {
-                auto monsters = player->get_room()->monsters();
-                Actor * enemy = nullptr;
-                for(Actor * m : monsters) {
-                    if(m->name() == cmds[1]) {
-                        enemy = m;
-                        break;
-                    }
-                }
-                if(enemy == nullptr) {
-                    std::cout << "There is no enemy with that name." << std::endl;
-                } else {
-                    std::cout << player->fight(enemy) << std::endl;
-                    act();
-                }
-            }
-        } else if (cmds.size() > 0 && cmds[0] == "consume") {
-            if (cmds.size() < 2) {
-                std::cout << "Consume what?" << std::endl;
-            } else {
-                if (!player->consume(cmds[1]))
-                    std::cout << "You can not consume that." << std::endl;
-            }
-        } else if (cmd == "choose" || (cmds.size() > 0 && cmds[0] == "choose")) {
-            std::cout << "You may not change your class." << std::endl;
         } else if (cmd == "") {
             // Ignore
         } else {
