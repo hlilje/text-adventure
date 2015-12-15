@@ -271,9 +271,10 @@ void print_greeting() {
         << "| Welcome to the adventure of your life. You are a     |\n"
         << "| human playing a generic text-based adventure game on |\n"
         << "| a computer.                                          |\n"
+        << "| Your goal is to kill all demons in the castle.       |\n"
         << "| Only one thing is certain; it is time to pick your   |\n"
         << "| class.                                               |\n"
-        << "| Enter 'choose <class>', where <class> must be        |\n"
+        << "| Enter 'choose <class>', where <class> must be one of |\n"
         << "| 'warrior', 'wizard' or 'peasant'.                    |\n"
         << "========================================================\n"
     << std::endl;
