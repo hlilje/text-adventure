@@ -14,6 +14,8 @@ std::vector<Actor *> demons; // Used for victory condition
 std::vector<Environment *> environments;
 std::vector<Object * > objects;
 Human * player;
+bool running = false;
+bool started = false;
 
 /**
  * Initialise the playable game.
@@ -448,6 +450,32 @@ bool victory() {
 }
 
 /**
+ * Exit the game.
+ */
+std::string exit() {
+    running = false;
+    return "";
+}
+
+/**
+ * Choose class
+ */
+std::string choose(std::string clss) {
+    if (started)
+        return "You may not change your class.";
+
+    if (clss == "")
+        return "Who do you want to be?";
+
+    if (choose_class(clss)) {
+        started = true;
+        return player->look();
+    } else {
+        return "Invalid class.";
+    }
+}
+
+/**
  * Start and run the gameplay loop which reads player input and acts
  * accordingly.
  */
@@ -455,12 +483,13 @@ void run() {
     print_greeting();
     print_help();
 
-    bool started = false;
+    running = true;
     print_prompt();
-    for (std::string cmd; std::getline(std::cin, cmd);) {
+    for (std::string cmd; running && std::getline(std::cin, cmd);) {
         std::vector<std::string> cmds = split(cmd, ' ');
 
-        if (cmd == "exit") break;
+        if (cmd == "exit")
+            exit();
 
         if (cmd == "help") {
             print_help();
