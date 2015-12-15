@@ -5,6 +5,8 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <unordered_map>
+#include <functional>
 
 using namespace text_adventure;
 
@@ -16,6 +18,8 @@ std::vector<Object * > objects;
 Human * player;
 bool running = false;
 bool started = false;
+std::unordered_map<std::string, std::function<std::string()>> cmd_single;
+std::unordered_map<std::string, std::function<std::string(std::string)>> cmd_double;
 
 /**
  * Initialise the playable game.
@@ -277,22 +281,22 @@ void print_greeting() {
 /**
  * Print the help text.
  */
-void print_help() {
-    std::cout
-    << "Commands:\n"
-    << "- go      <direction>:  Go to the direction.\n"
-    << "- attack  <enemy>:      Attack the enemy.\n"
-    << "- take    <item>:       Take the item.\n"
-    << "- drop    <item>:       Drop the item.\n"
-    << "- choose  <class>:      Select class before starting the game.\n"
-    << "- consume <consumable>: Consume the consumable.\n"
-    << "- help:      Get this information.\n"
-    << "- look:      Get information about your surroundings.\n"
-    << "- inventory: Get information about items you are carrying.\n"
-    << "- stats:     Get information about your current stats.\n"
-    << "- wait:      Skip your turn.\n"
-    << "- exit:      Exit the game.\n"
-    << std::endl;
+std::string print_help() {
+    std::string res;
+    res += "Commands:\n";
+    res += "- go      <direction>:  Go to the direction.\n";
+    res += "- attack  <enemy>:      Attack the enemy.\n";
+    res += "- take    <item>:       Take the item.\n";
+    res += "- drop    <item>:       Drop the item.\n";
+    res += "- choose  <class>:      Select class before starting the game.\n";
+    res += "- consume <consumable>: Consume the consumable.\n";
+    res += "- help:      Get this information.\n";
+    res += "- look:      Get information about your surroundings.\n";
+    res += "- inventory: Get information about items you are carrying.\n";
+    res += "- stats:     Get information about your current stats.\n";
+    res += "- wait:      Skip your turn.\n";
+    res += "- exit:      Exit the game.\n";
+    return res;
 }
 
 /**
@@ -343,6 +347,29 @@ std::vector<std::string> split(const std::string & s, const char delim) {
 }
 
 /**
+ * Call all actors' action functions.
+ */
+void act() {
+    for (const auto & actor : actors) {
+        if(actor->is_dead())
+            continue;
+
+        std::string a = actor->action();
+        if(a != "")
+            std::cout << "*** " << a << " ***\n" << std::endl;
+
+        actor->update();
+    }
+
+    for (const auto & environment : environments) {
+        if (Outdoor * const outdoor = dynamic_cast<Outdoor *>(environment))
+            outdoor->update();
+    }
+
+    player->update();
+}
+
+/**
  * Choose the given class.
  * Return false if the class is invalid.
  */
@@ -359,6 +386,14 @@ bool choose_class(const std::string & clss) {
     } else {
         return false;
     }
+
+    // TODO: MOVE TO OTHER CHOOSE FUNCTION
+    cmd_single["look"] = []() -> std::string { return player->look(); };
+    cmd_single["inventory"] = []() -> std::string { return player->items(); };
+    cmd_single["inv"] = []() -> std::string { return player->items(); };
+    cmd_single["stats"] = []() -> std::string { return player->statistics(); };
+    cmd_single["wait"] = []() -> std::string { act(); return ""; };
+
     return true;
 }
 
@@ -414,29 +449,6 @@ bool go_to(const std::string & direction) {
 }
 
 /**
- * Call all actors' action functions.
- */
-void act() {
-    for (const auto & actor : actors) {
-        if(actor->is_dead())
-            continue;
-
-        std::string a = actor->action();
-        if(a != "")
-            std::cout << "*** " << a << " ***\n" << std::endl;
-
-        actor->update();
-    }
-
-    for (const auto & environment : environments) {
-        if (Outdoor * const outdoor = dynamic_cast<Outdoor *>(environment))
-            outdoor->update();
-    }
-
-    player->update();
-}
-
-/**
  * Return true if the victor condition is met, i.e. all demons in the
  * castle have been killed.
  */
@@ -452,7 +464,7 @@ bool victory() {
 /**
  * Exit the game.
  */
-std::string exit() {
+std::string quit() {
     running = false;
     return "";
 }
@@ -483,18 +495,22 @@ void run() {
     print_greeting();
     print_help();
 
+    cmd_single["exit"] = quit;
+    cmd_single["help"] = print_help;
+
+
     running = true;
     print_prompt();
     for (std::string cmd; running && std::getline(std::cin, cmd);) {
         std::vector<std::string> cmds = split(cmd, ' ');
 
-        if (cmd == "exit")
-            exit();
+        if(cmds.size() == 1) {
+            if(cmd_single.count(cmd) > 0)
+                std::cout << cmd_single[cmd]() << std::endl;
+            else
+                std::cout << "I don't know what '" << cmd << "' means." << std::endl;
 
-        if (cmd == "help") {
-            print_help();
             print_prompt();
-            continue;
         }
 
         if (cmds.size() > 2) {
@@ -577,14 +593,6 @@ void run() {
             }
         } else if (cmd == "choose" || (cmds.size() > 0 && cmds[0] == "choose")) {
             std::cout << "You may not change your class." << std::endl;
-        } else if (cmd == "look") {
-            std::cout << player->look();
-        } else if (cmd == "inventory" || cmd == "inv") {
-            std::cout << player->items();
-        } else if (cmd == "stats") {
-            std::cout << player->statistics();
-        } else if (cmd == "wait") {
-            act();
         } else if (cmd == "") {
             // Ignore
         } else {
